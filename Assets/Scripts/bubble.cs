@@ -34,14 +34,14 @@ public class BubbleSpawner : MonoBehaviour
             {
                 Destroy(_bubble);
             }
-            SpawnBubble();
+            _bubble = SpawnBubble();
         }
     }
 
     private GameObject SpawnBubble()
     {
         // offset by gameobject's facing direction
-        float xOffset = transform.forward.x * 2;
+        float xOffset = transform.localScale.x * 3;
 
         Vector3 spawnPos = new Vector3(transform.position.x + xOffset,
                                        transform.position.y,
@@ -74,7 +74,7 @@ public class BubbleBehaviour : MonoBehaviour
     private void Start()
     {
         // Randomize the direction of the horizontal drift
-        _driftDirection = Random.Range(-1f, 1f);
+        _driftDirection = Random.Range(-1f, 1f) > 0 ? 1 : -1;
         // Destroy the bubble after a set time
     }
 
