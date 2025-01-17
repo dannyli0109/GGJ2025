@@ -1,0 +1,514 @@
+fileFormatVersion: 2
+guid: 52068dbcd60285c4186201f6a715cdf8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4710548271899984427
+    second: Tai-Sheet_0
+  - first:
+      213: 7626120257145899112
+    second: Tai-Sheet_1
+  - first:
+      213: -6136779119548016190
+    second: Tai-Sheet_2
+  - first:
+      213: -2095996438059407110
+    second: Tai-Sheet_3
+  - first:
+      213: -3824814548809295148
+    second: Tai-Sheet_4
+  - first:
+      213: -4522302885672283047
+    second: Tai-Sheet_5
+  - first:
+      213: 4072187971987703589
+    second: Tai-Sheet_6
+  - first:
+      213: -6137616411370776876
+    second: Tai-Sheet_7
+  - first:
+      213: 8899288818289929842
+    second: Tai-Sheet_8
+  - first:
+      213: -1609567084939182214
+    second: Tai-Sheet_9
+  - first:
+      213: 6320428848383324591
+    second: Tai-Sheet_10
+  - first:
+      213: -4025326866455637523
+    second: Tai-Sheet_11
+  - first:
+      213: -8108641040873932153
+    second: Tai-Sheet_12
+  - first:
+      213: -6323171816214771260
+    second: Tai-Sheet_13
+  - first:
+      213: 603704879178592691
+    second: Tai-Sheet_14
+  - first:
+      213: 6180054028778651860
+    second: Tai-Sheet_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tai-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 192
+        width: 7
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b22cdeb12ba3f5140800000000000000
+      internalID: 4710548271899984427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 192
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 868879d08fb65d960800000000000000
+      internalID: 7626120257145899112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 192
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c95e42a7e7c5daa0800000000000000
+      internalID: -6136779119548016190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 192
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af82cfa385689e2e0800000000000000
+      internalID: -2095996438059407110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 128
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dad97ebe678beac0800000000000000
+      internalID: -3824814548809295148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 129
+        width: 9
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95497c45c7d8d31c0800000000000000
+      internalID: -4522302885672283047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 129
+        width: 11
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52702f89261538830800000000000000
+      internalID: 4072187971987703589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 128
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d613a0746ec2daa0800000000000000
+      internalID: -6137616411370776876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 65
+        width: 9
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ee6cf9700a08b70800000000000000
+      internalID: 8899288818289929842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 65
+        width: 11
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7ff90c934ba9a9e0800000000000000
+      internalID: -1609567084939182214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 64
+        width: 7
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1f400fc8ca6b750800000000000000
+      internalID: 6320428848383324591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 64
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de15314ca8a2328c0800000000000000
+      internalID: -4025326866455637523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78a3e8b4fe1587f80800000000000000
+      internalID: -8108641040873932153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1
+        width: 7
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c9c1c81cb49f38a0800000000000000
+      internalID: -6323171816214771260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 1
+        width: 8
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b13c98936ac06800800000000000000
+      internalID: 603704879178592691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tai-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 0
+        width: 8
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d0c2165566f3c550800000000000000
+      internalID: 6180054028778651860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 0576ced1185965d46b88605b6a3702d3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Tai-Sheet_0: 4710548271899984427
+      Tai-Sheet_1: 7626120257145899112
+      Tai-Sheet_10: 6320428848383324591
+      Tai-Sheet_11: -4025326866455637523
+      Tai-Sheet_12: -8108641040873932153
+      Tai-Sheet_13: -6323171816214771260
+      Tai-Sheet_14: 603704879178592691
+      Tai-Sheet_15: 6180054028778651860
+      Tai-Sheet_2: -6136779119548016190
+      Tai-Sheet_3: -2095996438059407110
+      Tai-Sheet_4: -3824814548809295148
+      Tai-Sheet_5: -4522302885672283047
+      Tai-Sheet_6: 4072187971987703589
+      Tai-Sheet_7: -6137616411370776876
+      Tai-Sheet_8: 8899288818289929842
+      Tai-Sheet_9: -1609567084939182214
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
