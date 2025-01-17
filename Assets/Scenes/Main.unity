@@ -1141,10 +1141,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.0017937219
     y: 0
-    width: 1
-    height: 1
+    width: 1.5999999
+    height: 4.429433
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1708,6 +1708,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1355210368239809850, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175212910696870196, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
+      propertyPath: m_UsedByComposite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3890968896845652610, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1751,13 +1759,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1355210368239809850, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2018975834}
   m_SourcePrefab: {fileID: 100100000, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
 --- !u!4 &2018975827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3890968896845652610, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
   m_PrefabInstance: {fileID: 2018975826}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2018975834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060982029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355325722a19b42a4aa75b6bcba70d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 4618447527710482737, guid: 3b6b62b0aa2a941778daebd35e0efacf, type: 3}
+  bubbleSpeed: 0.1
+  horizontalDrift: 0.3
+  bouncebackDistance: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

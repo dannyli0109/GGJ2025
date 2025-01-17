@@ -2254,11 +2254,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 4618447527710482737, guid: 3b6b62b0aa2a941778daebd35e0efacf, type: 3}
-  spawnRange: 5
   minBubbleSpeed: 0.5
   maxBubbleSpeed: 2
   horizontalDrift: 0.3
   destroyTime: 10
+  bouncebackDistance: 1
 --- !u!4 &1672388287
 Transform:
   m_ObjectHideFlags: 0

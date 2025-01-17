@@ -16,30 +16,33 @@ public class BubbleSpawner : MonoBehaviour
     // public float spawnRange = 5f;
 
     [Header("Movement Settings")]
-    [Tooltip("Minimum upward speed for bubbles.")]
-    public float minBubbleSpeed = 0.5f;
-    [Tooltip("Maximum upward speed for bubbles.")]
-    public float maxBubbleSpeed = 2f;
+    [Tooltip("Upward speed for bubbles.")]
+    public float bubbleSpeed = 0.1f;
     [Tooltip("The range of horizontal drifting speed.")]
     public float horizontalDrift = 0.3f;
-    [Tooltip("The time in seconds before bubbles are destroyed.")]
-    public float destroyTime = 10f;
     [Tooltip("The distance to move opposite direction")]
     public float bouncebackDistance = 1f;
+
+    private GameObject _bubble;
 
     private void Update()
     {
         // Spawn a bubble whenever the player presses 'F'
         if (Input.GetKeyDown(KeyCode.F))
         {
+            if (_bubble != null)
+            {
+                Destroy(_bubble);
+            }
             SpawnBubble();
         }
     }
 
-    private void SpawnBubble()
+    private GameObject SpawnBubble()
     {
-        // Random horizontal spawn offset
-        float xOffset = 0; // Random.Range(-spawnRange, spawnRange);
+        // offset by gameobject's facing direction
+        float xOffset = transform.forward.x * 2;
+
         Vector3 spawnPos = new Vector3(transform.position.x + xOffset,
                                        transform.position.y,
                                        transform.position.z);
@@ -49,10 +52,11 @@ public class BubbleSpawner : MonoBehaviour
 
         // Add the BubbleBehaviour script to control the bubble's movement
         BubbleBehaviour bubbleBehavior = newBubble.AddComponent<BubbleBehaviour>();
-        bubbleBehavior.verticalSpeed = Random.Range(minBubbleSpeed, maxBubbleSpeed);
+        bubbleBehavior.verticalSpeed = bubbleSpeed;
         bubbleBehavior.horizontalDrift = horizontalDrift;
-        bubbleBehavior.destroyTime = destroyTime;
         bubbleBehavior.bouncebackDistance = bouncebackDistance;
+
+        return newBubble;
     }
 }
 /// <summary>
@@ -62,7 +66,6 @@ public class BubbleBehaviour : MonoBehaviour
 {
     [HideInInspector] public float verticalSpeed;
     [HideInInspector] public float horizontalDrift;
-    [HideInInspector] public float destroyTime;
     [HideInInspector] public float bouncebackDistance = 1f;
 
     private float _driftDirection;
@@ -73,7 +76,6 @@ public class BubbleBehaviour : MonoBehaviour
         // Randomize the direction of the horizontal drift
         _driftDirection = Random.Range(-1f, 1f);
         // Destroy the bubble after a set time
-        Destroy(gameObject, destroyTime);
     }
 
     private void Update()
@@ -104,6 +106,52 @@ public class BubbleBehaviour : MonoBehaviour
         if (transform.position.y > screenY + bubbleHeight / 2)
         {
             Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// When the player first lands on the bubble, make the player a child of the bubble.
+    /// This lets the player ride the bubble.
+    /// </summary>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if it's the player colliding
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Make the player a child of the bubble
+            collision.transform.SetParent(transform, true);
+        }
+    }
+
+    /// <summary>
+    /// When the player leaves the bubble, remove the parent-child relationship.
+    /// </summary>
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Reset the player's parent to null
+            collision.transform.SetParent(null, true);
+        }
+    }
+
+    /// <summary>
+    /// Detach the player (or any children) before the bubble is destroyed.
+    /// </summary>
+    private void OnDestroy()
+    {
+        // For safety, ensure no child remains parented
+        // (especially the player, if still attached).
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = transform.GetChild(i);
+
+            // If you're specifically looking for "Player", do:
+            // if (child.CompareTag("Player"))
+            //     child.SetParent(null, true);
+
+            // Or simply detach all children, if you want:
+            child.SetParent(null, true);
         }
     }
 }
