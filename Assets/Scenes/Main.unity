@@ -1704,6 +1704,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 622085084561034407, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
+      propertyPath: groundContactFilter.useLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 622085084561034407, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
+      propertyPath: groundContactFilter.layerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 1355210368239809850, guid: adf4aa4e8ff61a7459daf0186cb83765, type: 3}
       propertyPath: m_Name
       value: Player
