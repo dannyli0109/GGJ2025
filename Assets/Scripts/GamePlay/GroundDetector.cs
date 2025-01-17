@@ -11,11 +11,11 @@ public class GroundDetector : MonoBehaviour
     public LayerMask groundLayerMask;
     [HideInInspector] public Collider2D groundCollider;
     float detectDistance;
-    BoxCollider2D col;
+    CapsuleCollider2D col;
 
     private void Awake()
     {
-        col = transform.parent.GetComponent<BoxCollider2D>();
+        col = transform.parent.GetComponent<CapsuleCollider2D>();
         detectDistance = col.size.x / 2;
     }
 
@@ -47,8 +47,8 @@ public class GroundDetector : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        var box = transform.parent.GetComponent<BoxCollider2D>();
-        float r = box.size.x / 2;
+        var box = transform.parent.GetComponent<CapsuleCollider2D>();
+        float r = box.size.y / 2;
         Gizmos.color = Color.green;
         switch (detectType)
         {
