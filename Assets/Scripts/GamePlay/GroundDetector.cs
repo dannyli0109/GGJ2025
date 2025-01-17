@@ -9,8 +9,7 @@ public class GroundDetector : MonoBehaviour
     }
     public DetectType detectType;
     public LayerMask groundLayerMask;
-    public Collider2D groundCollider;
-    public ContactFilter2D contactFilter;
+    [HideInInspector] public Collider2D groundCollider;
     float detectDistance;
     BoxCollider2D col;
 
