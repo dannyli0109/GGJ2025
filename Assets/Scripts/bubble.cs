@@ -13,6 +13,7 @@ using UnityEngine.UIElements;
 public class BubbleSpawner : MonoBehaviour
 {
     public BubbleSpawnerData data;
+    public Color bubbleColor;
     private GameObject[] _bubbles = new GameObject[2];
 
     public GameObject SpawnBubble()
@@ -26,6 +27,7 @@ public class BubbleSpawner : MonoBehaviour
 
         // Instantiate the bubble
         GameObject newBubble = Instantiate(data.bubblePrefab, spawnPos, Quaternion.identity);
+        newBubble.transform.GetChild(0).GetComponent<SpriteRenderer>().color = bubbleColor;
 
         // Add the BubbleBehaviour script to control the bubble's movement
         BubbleBehaviour bubbleBehavior = newBubble.AddComponent<BubbleBehaviour>();
