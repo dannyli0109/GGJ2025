@@ -18,7 +18,7 @@ public class BubbleSpawner : MonoBehaviour
     public GameObject SpawnBubble()
     {
         // offset by gameobject's facing direction
-        float xOffset = transform.localScale.x * 2f;
+        float xOffset = transform.localScale.x * 1.7f;
 
         Vector3 spawnPos = new Vector3(transform.position.x + xOffset,
                                        transform.position.y + 0.2f,
@@ -38,6 +38,7 @@ public class BubbleSpawner : MonoBehaviour
         bubbleBehavior.maxHorizontalDistance = data.maxHorizontalDistance;
         bubbleBehavior.destroyTime = data.destroyTime;
         bubbleBehavior.popClips = data.popClips;
+        bubbleBehavior.blowClips = data.blowClips;
         bubbleBehavior.Init();
 
         return newBubble;
@@ -96,6 +97,7 @@ public class BubbleBehaviour : MonoBehaviour
     public float destroyTime = 10f;
 
     public List<AudioClip> popClips;
+    public List<AudioClip> blowClips;
 
     private float _driftDirection;
     private float _distance = 0;
@@ -110,6 +112,7 @@ public class BubbleBehaviour : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        PlayBlowAudio();
         // Randomize the direction of the horizontal drift
         // _driftDirection = 1;
         // Destroy the bubble after a set time
@@ -130,6 +133,12 @@ public class BubbleBehaviour : MonoBehaviour
     void PlayPopAudio()
     {
         audioSource.clip = popClips[UnityEngine.Random.Range(0, popClips.Count)];
+        audioSource.Play();
+    }
+
+    void PlayBlowAudio()
+    {
+        audioSource.clip = blowClips[UnityEngine.Random.Range(0, blowClips.Count)];
         audioSource.Play();
     }
 
