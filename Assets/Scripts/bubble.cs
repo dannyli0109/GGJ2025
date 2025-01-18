@@ -23,6 +23,12 @@ public class BubbleSpawner : MonoBehaviour
     public float horizontalDrift = 0.3f;
     [Tooltip("The distance to move opposite direction")]
     public float bouncebackDistance = 1f;
+    [Tooltip("Push horizontal speed")]
+    public float pushHorizontalSpeed = 4f;
+    [Tooltip("Push vertical speed")]
+    public float pushVerticalSpeed = 2f;
+    [Tooltip("Max horizontal distance")]
+    public float maxHorizontalDistance = 5f;
 
     private GameObject _bubble;
 
@@ -42,7 +48,7 @@ public class BubbleSpawner : MonoBehaviour
     private GameObject SpawnBubble()
     {
         // offset by gameobject's facing direction
-        float xOffset = transform.localScale.x * 2;
+        float xOffset = transform.localScale.x * 1.5f;
 
         Vector3 spawnPos = new Vector3(transform.position.x + xOffset,
                                        transform.position.y,
@@ -57,6 +63,9 @@ public class BubbleSpawner : MonoBehaviour
         bubbleBehavior.horizontalDrift = horizontalDrift;
         bubbleBehavior.bouncebackDistance = bouncebackDistance;
         bubbleBehavior.initialDir = xOffset > 0 ? 1 : -1;
+        bubbleBehavior.pushHorizontalSpeed = pushHorizontalSpeed;
+        bubbleBehavior.pushVerticalSpeed = pushVerticalSpeed;
+        bubbleBehavior.maxHorizontalDistance = maxHorizontalDistance;
         bubbleBehavior.Init();
 
 
@@ -76,13 +85,17 @@ public class BubbleBehaviour : MonoBehaviour
     private bool _hasBeenPushed = false;        // Once true, bubble moves in pushDirection only
     private Vector2 _pushDirection = Vector2.zero;  // The direction (unit vector) of the push
     [Tooltip("Speed at which the bubble moves after being pushed.")]
-    public float pushSpeed = 2f;
+    public float pushHorizontalSpeed = 4f;
+    public float pushVerticalSpeed = 2f;
+    public float maxHorizontalDistance = 5f;
+
 
     private float _driftDirection;
     private float _distance = 0;
     private bool _isInit = false;
     private bool _shouldMove = true;
     float pushPower = 50;
+
 
     private void Start()
     {
@@ -104,7 +117,16 @@ public class BubbleBehaviour : MonoBehaviour
         if (!_isInit) return;
         if (_hasBeenPushed)
         {
-            transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
+            // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
+            // slow down horizontal speed as it approaches max distance
+            float speed = pushHorizontalSpeed * (1 - Mathf.Abs(_distance / maxHorizontalDistance));
+            Vector3 movement = new Vector3(
+                _pushDirection.x * speed * Time.deltaTime,
+                _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
+                0f
+            );
+            transform.Translate(movement);
+            _distance += movement.x;
 
             // If you still want the bubble to be destroyed off-screen:
             CheckAndDestroyOffScreen();
@@ -181,6 +203,15 @@ public class BubbleBehaviour : MonoBehaviour
             // Reset the player's parent to null
             collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Triggered" + other.tag);
+        if (!other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
         }
     }
 
