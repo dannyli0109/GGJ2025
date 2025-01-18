@@ -146,7 +146,7 @@ public class BubbleBehaviour : MonoBehaviour
         if (gameObject.IsDestroyed()) return;
         if (!_isInit) return;
         if (destroyed) return;
-        // if (!_shouldMove) return;
+        if (!_shouldMove) return;
         {
             if (_hasBeenPushed)
             {
