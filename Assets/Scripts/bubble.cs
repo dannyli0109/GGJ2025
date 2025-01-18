@@ -309,6 +309,8 @@ public class BubbleBehaviour : MonoBehaviour
         _pushDirection = finalDir;
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
+        _distance = 0;
+
     }
 
 
