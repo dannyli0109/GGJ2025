@@ -1,10 +1,9 @@
+using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using HFSM;
-using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+
 
 /// <summary>
 /// Spawns bubbles that float upward when the player presses 'F'.
@@ -132,7 +131,7 @@ public class BubbleBehaviour : MonoBehaviour
 
     void PlayPopAudio()
     {
-        audioSource.clip = popClips[Random.Range(0, popClips.Count)];
+        audioSource.clip = popClips[UnityEngine.Random.Range(0, popClips.Count)];
         audioSource.Play();
     }
 
@@ -155,11 +154,14 @@ public class BubbleBehaviour : MonoBehaviour
             {
                 // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
                 // slow down horizontal speed as it approaches max distance
+                // it will be fast -> slow
                 if (_horizontalDistance > maxHorizontalDistance)
                 {
                     _horizontalDistance = maxHorizontalDistance;
                 }
-                float speed = pushHorizontalSpeed * (1 - Mathf.Abs(_horizontalDistance / maxHorizontalDistance));
+
+                float percent = _horizontalDistance / maxHorizontalDistance;
+                float speed = pushHorizontalSpeed * (1 - percent);
                 Vector3 movement = new Vector3(
                     _pushDirection.x * speed * Time.deltaTime,
                     _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
@@ -167,7 +169,7 @@ public class BubbleBehaviour : MonoBehaviour
                 );
 
                 transform.Translate(movement);
-                _horizontalDistance += movement.x;
+                _horizontalDistance += Mathf.Abs(movement.x);
 
                 // If you still want the bubble to be destroyed off-screen:
             }
