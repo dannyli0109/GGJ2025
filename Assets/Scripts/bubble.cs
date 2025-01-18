@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -72,6 +73,11 @@ public class BubbleBehaviour : MonoBehaviour
     [HideInInspector] public float bouncebackDistance = 1f;
     [HideInInspector] public float initialDir;
 
+    private bool _hasBeenPushed = false;        // Once true, bubble moves in pushDirection only
+    private Vector2 _pushDirection = Vector2.zero;  // The direction (unit vector) of the push
+    [Tooltip("Speed at which the bubble moves after being pushed.")]
+    public float pushSpeed = 2f;
+
     private float _driftDirection;
     private float _distance = 0;
     private bool _isInit = false;
@@ -96,28 +102,51 @@ public class BubbleBehaviour : MonoBehaviour
         // if gameobject is destroyed
         if (gameObject.IsDestroyed()) return;
         if (!_isInit) return;
-        if (!_shouldMove) return;
-
-        // Move the bubble upward
-        Vector3 movement = new Vector3(_driftDirection * horizontalDrift * Time.deltaTime,
-                                       verticalSpeed * Time.deltaTime,
-                                       0f);
-        // move opposite direction if bubble move more than certain distance
-        // the distance is relative
-        this._distance += movement.x;
-        if (Mathf.Abs(this._distance) > bouncebackDistance)
+        if (_hasBeenPushed)
         {
-            _driftDirection *= -1;
-            this._distance = 0;
+            transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
+
+            // If you still want the bubble to be destroyed off-screen:
+            CheckAndDestroyOffScreen();
+            return;
         }
 
+        // -----------------------------------------------------------
+        // Existing drifting logic (only used if NOT pushed yet)
+        // -----------------------------------------------------------
+        if (_shouldMove)
+        {
+            // Move the bubble upward + drift
+            Vector3 movement = new Vector3(
+                _driftDirection * horizontalDrift * Time.deltaTime,
+                verticalSpeed * Time.deltaTime,
+                0f
+            );
 
-        transform.Translate(movement);
+            // Track horizontal distance for bounceback
+            _distance += movement.x;
+            if (Mathf.Abs(_distance) > bouncebackDistance)
+            {
+                _driftDirection *= -1;
+                _distance = 0;
+            }
 
-        // Destroy the the bubble if it goes above the screen
-        // get screen height
+            // Apply the movement
+            transform.Translate(movement);
+        }
+
+        // Continue checking if the bubble goes off-screen
+        CheckAndDestroyOffScreen();
+    }
+
+    /// <summary>
+    /// Simple helper to destroy the bubble if it goes above the screen.
+    /// </summary>
+    private void CheckAndDestroyOffScreen()
+    {
         float screenY = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
         float bubbleHeight = GetComponent<SpriteRenderer>().bounds.size.y;
+
         if (transform.position.y > screenY + bubbleHeight / 2)
         {
             Destroy(gameObject);
@@ -155,50 +184,65 @@ public class BubbleBehaviour : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// A trigger-based push: if the player is inside this bubble's trigger from below or the side,
-    /// the bubble moves away from the player.
-    /// </summary>
     private void OnTriggerStay2D(Collider2D other)
     {
-        // Only respond to the player
         if (!other.CompareTag("Player")) return;
 
-        // If the bubble isn't moving for some reason (player is standing on top), skip
-        // unless you specifically want a push even when riding. Adjust to your liking:
-        if (!_shouldMove) return;
 
-        // Calculate direction from the player to the bubble
-        Vector2 direction = (transform.position - other.transform.position);
+        // If the bubble is already pushed, don't re-push it
+        if (_hasBeenPushed) return;
 
-        // If player is mostly below the bubble (direction.y > x), push bubble up
-        // If from the side, push bubble horizontally away from the player
-        float absX = Mathf.Abs(direction.x);
-        float absY = Mathf.Abs(direction.y);
+        // Vector from player's position to bubble's position
+        Vector2 bubblePos = transform.position;
+        Vector2 playerPos = other.transform.position;
+        Vector2 direction = (bubblePos - playerPos);
 
-        if (absY > absX)
+        // Only push if the player is actually below or to the side (y > 0 => bubble is above the player)
+        if (direction.y <= 0)
         {
-            // We only push up if the bubble is above the player => direction.y > 0
-            // (meaning the player is below). Adjust as needed if you want symmetrical logic.
-            if (direction.y > 0f)
-            {
-                transform.Translate(Vector2.up * pushPower * Time.deltaTime, Space.World);
-            }
+            // If you want symmetrical logic from above, remove or invert this check.
+            return;
+        }
+
+        // Compute how far from straight-up this direction is
+        float angle = Vector2.SignedAngle(Vector2.up, direction);
+        float absAngle = Mathf.Abs(angle);
+
+        // Decide final push direction based on angle thresholds
+        Vector2 finalDir;
+
+        if (other.GetComponent<MovementController>().isOnGround)
+        {
+            // only check which side the player is on
+            finalDir = (playerPos.x > bubblePos.x) ? Vector2.left : Vector2.right;
         }
         else
         {
-            // Pushing from the left or right
-            if (direction.x > 0f)
+            // 0° - 22.5° => straight up
+            if (absAngle < 22.5f)
             {
-                // Bubble is to the right => player is on the left => push bubble further right
-                transform.Translate(Vector2.right * pushPower * Time.deltaTime, Space.World);
+                finalDir = Vector2.up;
+            }
+            // 22.5° - 67.5° => diagonal (±45° up)
+            else if (absAngle < 67.5f)
+            {
+                // If angle > 0 => direction is "left" from the bubble's perspective, so push up-left
+                finalDir = (angle > 0)
+                    ? new Vector2(-1f, 1f).normalized
+                    : new Vector2(1f, 1f).normalized;
             }
             else
             {
-                // Bubble is to the left => player is on the right => push bubble further left
-                transform.Translate(Vector2.left * pushPower * Time.deltaTime, Space.World);
+                return;
             }
         }
+
+
+
+        // Record that we got pushed in this final direction
+        _pushDirection = finalDir;
+        _hasBeenPushed = true;
+        _shouldMove = false;  // (Optional) Stop the drift if you want
     }
 
 
