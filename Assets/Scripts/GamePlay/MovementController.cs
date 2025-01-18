@@ -25,7 +25,7 @@ public class MovementController : MonoBehaviour
 		}
 	}
 	float landJumpSpeed;
-	float airJumpSpeed;
+	//float airJumpSpeed;
 
 	[HideInInspector] public bool inCoyoteTime = false;
 	[HideInInspector] public bool isOnGround => IsOnGround();
@@ -43,7 +43,7 @@ public class MovementController : MonoBehaviour
 		rig = GetComponent<Rigidbody2D>();
 		mainCamera = Camera.main;
 		landJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.landJumpHeight);
-		airJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.airJumpHeight);
+		//airJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.airJumpHeight);
 		ResetJumpCount();
 	}
 
@@ -84,19 +84,19 @@ public class MovementController : MonoBehaviour
 		{
 			SetVelocity(velocityX, landJumpSpeed);
 		}
-		else
-		{
-			if (rig.velocity.y > 0)
-			{
-				//上升过程
-				SetVelocity(velocityX, airJumpSpeed);
-			}
-			else
-			{
-				//下落过程
-				SetVelocity(velocityX, airJumpSpeed);
-			}
-		}
+		//else
+		//{
+		//	if (rig.velocity.y > 0)
+		//	{
+		//		//上升过程
+		//		SetVelocity(velocityX, airJumpSpeed);
+		//	}
+		//	else
+		//	{
+		//		//下落过程
+		//		SetVelocity(velocityX, airJumpSpeed);
+		//	}
+		//}
 	}
 
 	public void RecordSpawnPos()
@@ -163,10 +163,10 @@ public class MovementController : MonoBehaviour
 		}
 	}
 
-	public void SprintCountDown()
-	{
-		StartCoroutine(SprintCountDownProgress(movementData.sprintCD));
-	}
+	//public void SprintCountDown()
+	//{
+	//	StartCoroutine(SprintCountDownProgress(movementData.sprintCD));
+	//}
 
 	public bool IsOnGround()
 	{
