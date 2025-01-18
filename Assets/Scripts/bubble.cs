@@ -1,10 +1,9 @@
+using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using HFSM;
-using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+
 
 /// <summary>
 /// Spawns bubbles that float upward when the player presses 'F'.
@@ -64,9 +63,21 @@ public class BubbleSpawner : MonoBehaviour
         bubbleBehavior.popClips = popClips;
         bubbleBehavior.Init();
 
-
         return newBubble;
     }
+
+    public void checkExplode()
+    {
+        if (_bubble == null) return;
+        Debug.Log("Check Explode");
+        _bubble.GetComponent<BubbleBehaviour>().checkExplode();
+    }
+
+    public void onBubble(GameObject bubble)
+    {
+        _bubble = bubble;
+    }
+
 }
 /// <summary>
 /// Controls the movement and destruction of individual bubble objects.
@@ -96,6 +107,7 @@ public class BubbleBehaviour : MonoBehaviour
     float pushPower = 50;
     bool destroyed = false;
     AudioSource audioSource;
+    bool _shouldPop = false;
 
     private void Start()
     {
@@ -119,7 +131,7 @@ public class BubbleBehaviour : MonoBehaviour
 
     void PlayPopAudio()
     {
-        audioSource.clip = popClips[Random.Range(0, popClips.Count)];
+        audioSource.clip = popClips[UnityEngine.Random.Range(0, popClips.Count)];
         audioSource.Play();
     }
 
@@ -142,11 +154,14 @@ public class BubbleBehaviour : MonoBehaviour
             {
                 // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
                 // slow down horizontal speed as it approaches max distance
+                // it will be fast -> slow
                 if (_horizontalDistance > maxHorizontalDistance)
                 {
                     _horizontalDistance = maxHorizontalDistance;
                 }
-                float speed = pushHorizontalSpeed * (1 - Mathf.Abs(_horizontalDistance / maxHorizontalDistance));
+
+                float percent = _horizontalDistance / maxHorizontalDistance;
+                float speed = pushHorizontalSpeed * (1 - percent);
                 Vector3 movement = new Vector3(
                     _pushDirection.x * speed * Time.deltaTime,
                     _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
@@ -154,7 +169,7 @@ public class BubbleBehaviour : MonoBehaviour
                 );
 
                 transform.Translate(movement);
-                _horizontalDistance += movement.x;
+                _horizontalDistance += Mathf.Abs(movement.x);
 
                 // If you still want the bubble to be destroyed off-screen:
             }
@@ -219,7 +234,9 @@ public class BubbleBehaviour : MonoBehaviour
             // Make the player a child of the bubble
             // collision.transform.SetParent(transform, true);
             _shouldMove = false;    // Stop the bubble from moving
+            _shouldPop = true;
 
+            collision.gameObject.GetComponent<BubbleSpawner>().onBubble(gameObject);
         }
     }
 
@@ -230,12 +247,9 @@ public class BubbleBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
             // Reset the player's parent to null
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
-
-
         }
     }
 
@@ -305,6 +319,15 @@ public class BubbleBehaviour : MonoBehaviour
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
         _horizontalDistance = 0;
+    }
+
+    public void checkExplode()
+    {
+        if (destroyed) return;
+        if (_shouldPop)
+        {
+            destroyBubble();
+        }
     }
 
 
