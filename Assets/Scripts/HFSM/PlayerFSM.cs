@@ -47,23 +47,27 @@ namespace HFSM
 			normalFsm.AddState("CoyoteTime", new PlayerStateCoyoteTime(this, input));
 			normalFsm.AddState("Jump", new PlayerStateJump(this, input));
 			normalFsm.AddState("Rise", new PlayerStateRise(this, input));
-			normalFsm.AddState("AirJump", new PlayerStateJump(this, input));
+			normalFsm.AddState("Bubble", new PlayerStateBubble(this, input));
+			//normalFsm.AddState("AirJump", new PlayerStateJump(this, input));
 
-			normalFsm.AddTransition("Fall", "AirJump", condition: CheckJump);
+			//normalFsm.AddTransition("Fall", "AirJump", condition: CheckJump);
 			normalFsm.AddTransition("Fall", "Idle", condition: t => movementController.isOnGround);
 			normalFsm.AddTwoWayTransition("Idle", "Run", t => input.Move);//TODO
 			normalFsm.AddTransition("Idle", "Jump", condition: CheckJump);
+			normalFsm.AddTransition("Idle", "Bubble", condition: t => input.Interact);
 			normalFsm.AddTransition("Idle", "Fall", condition: CheckOnAir, onTransition: OnTransitionPlatformToFall);
 			normalFsm.AddTransition("Idle", "Fall", condition: t => input.Down && input.HasBuffer("Jump"), onTransition: OnTransitionPlatformToFall);
 			normalFsm.AddTransition("Run", "CoyoteTime", condition: CheckOnAir);
 			normalFsm.AddTransition("Run", "Jump", condition: CheckJump);
+			normalFsm.AddTransition("Run", "Bubble", condition: t => input.Interact);
 			normalFsm.AddTransition("Run", "Fall", condition: CheckOnAir, onTransition: OnTransitionPlatformToFall);
 			normalFsm.AddTransition("CoyoteTime", "Jump", condition: CheckJump);
 			normalFsm.AddTransition(new TransitionAfter("CoyoteTime", "Fall", movementController.movementData.coyoteTime, onTransition: OnTransitionPlatformToFall));
 			normalFsm.AddTransition("Jump", "Rise", condition: t => movementController.velocity.y > 0);
 			normalFsm.AddTransition("Rise", "Fall", condition: t => movementController.velocity.y <= 0);
-			normalFsm.AddTransition("Rise", "AirJump", condition: CheckJump);
-			normalFsm.AddTransition("AirJump", "Rise", condition: t => movementController.velocity.y > 0);
+			normalFsm.AddTransition(new TransitionAfter("Bubble", "Idle", 0.2f));
+			//normalFsm.AddTransition("Rise", "AirJump", condition: CheckJump);
+			//normalFsm.AddTransition("AirJump", "Rise", condition: t => movementController.velocity.y > 0);
 
 			lowerFsm = new StateMachine();
 			lowerFsm.AddState("Normal", normalFsm);
