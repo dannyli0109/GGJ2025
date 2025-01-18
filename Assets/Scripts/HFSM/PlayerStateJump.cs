@@ -25,9 +25,12 @@ namespace HFSM
             input.UseBuffer("Jump");
             movementController.Jump();
             movementController.JumpCount--;
-            Debug.Log("Jump");
-            Debug.Log("mono: " + mono.gameObject.name);
-            if (mono.gameObject.GetComponent<BubbleSpawner>())
+			var groundCollider = movementController.groundDetector.Detect();
+			if (groundCollider != null && groundCollider.CompareTag("Ground"))
+			{
+				movementController.RecordSpawnPos();
+			}
+			if (mono.gameObject.GetComponent<BubbleSpawner>())
             {
                 mono.gameObject.GetComponent<BubbleSpawner>().checkExplode();
             }
