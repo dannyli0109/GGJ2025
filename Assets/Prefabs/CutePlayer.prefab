@@ -285,7 +285,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.281874, y: -6.1641283, z: 0.1485622}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 49043342086243945}
@@ -416,10 +416,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355325722a19b42a4aa75b6bcba70d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 4618447527710482737, guid: 3b6b62b0aa2a941778daebd35e0efacf, type: 3}
+  bubblePrefab: {fileID: 4618447527710482737, guid: e98bd66a7b761844799e05504f49496f, type: 3}
   bubbleSpeed: 0.3
   horizontalDrift: 0.5
   bouncebackDistance: 0.5
+  pushHorizontalSpeed: 4
+  pushVerticalSpeed: 2
+  maxHorizontalDistance: 5
 --- !u!60 &3867591505312670605
 PolygonCollider2D:
   m_ObjectHideFlags: 0
