@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3df91658da68e42f88c5db433d4ebf09, type: 2}
-  bubbleColor: {r: 1, g: 0.5254902, b: 0.7882353, a: 1}
+  bubbleColor: {r: 1, g: 0.9009434, b: 0.9565541, a: 1}
 --- !u!82 &3842387112292332052
 AudioSource:
   m_ObjectHideFlags: 0
