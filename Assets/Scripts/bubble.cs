@@ -41,7 +41,7 @@ public class BubbleSpawner : MonoBehaviour
     private GameObject SpawnBubble()
     {
         // offset by gameobject's facing direction
-        float xOffset = transform.localScale.x * 3;
+        float xOffset = transform.localScale.x * 2;
 
         Vector3 spawnPos = new Vector3(transform.position.x + xOffset,
                                        transform.position.y,
@@ -55,6 +55,9 @@ public class BubbleSpawner : MonoBehaviour
         bubbleBehavior.verticalSpeed = bubbleSpeed;
         bubbleBehavior.horizontalDrift = horizontalDrift;
         bubbleBehavior.bouncebackDistance = bouncebackDistance;
+        bubbleBehavior.initialDir = xOffset > 0 ? 1 : -1;
+        bubbleBehavior.Init();
+
 
         return newBubble;
     }
@@ -67,21 +70,30 @@ public class BubbleBehaviour : MonoBehaviour
     [HideInInspector] public float verticalSpeed;
     [HideInInspector] public float horizontalDrift;
     [HideInInspector] public float bouncebackDistance = 1f;
+    [HideInInspector] public float initialDir;
 
     private float _driftDirection;
     private float _distance = 0;
+    private bool _isInit = false;
 
     private void Start()
     {
         // Randomize the direction of the horizontal drift
-        _driftDirection = Random.Range(-1f, 1f) > 0 ? 1 : -1;
+        // _driftDirection = 1;
         // Destroy the bubble after a set time
+    }
+
+    public void Init()
+    {
+        _isInit = true;
+        _driftDirection = initialDir;
     }
 
     private void Update()
     {
         // if gameobject is destroyed
         if (gameObject.IsDestroyed()) return;
+        if (!_isInit) return;
 
         // Move the bubble upward
         Vector3 movement = new Vector3(_driftDirection * horizontalDrift * Time.deltaTime,
