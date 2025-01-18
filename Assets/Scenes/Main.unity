@@ -197,6 +197,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: bubbleSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: horizontalDrift
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: bouncebackDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2086064545993363811, guid: bdad20334991807468e12753efdcdd53, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -247,11 +259,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8342412047546190859, guid: bdad20334991807468e12753efdcdd53, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 1.449083
       objectReference: {fileID: 0}
     - target: {fileID: 8342412047546190859, guid: bdad20334991807468e12753efdcdd53, type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 1.3287927
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342412047546190859, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.43304425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342412047546190859, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.1643964
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -729,10 +749,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.0029325513
-    width: 1
-    height: 0.9941349
+    x: 0.0025252525
+    y: 0
+    width: 2.939394
+    height: 3.96973
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

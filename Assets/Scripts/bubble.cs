@@ -75,6 +75,7 @@ public class BubbleBehaviour : MonoBehaviour
     private float _driftDirection;
     private float _distance = 0;
     private bool _isInit = false;
+    private bool _shouldMove = true;
 
     private void Start()
     {
@@ -94,6 +95,7 @@ public class BubbleBehaviour : MonoBehaviour
         // if gameobject is destroyed
         if (gameObject.IsDestroyed()) return;
         if (!_isInit) return;
+        if (!_shouldMove) return;
 
         // Move the bubble upward
         Vector3 movement = new Vector3(_driftDirection * horizontalDrift * Time.deltaTime,
@@ -130,8 +132,12 @@ public class BubbleBehaviour : MonoBehaviour
         // Check if it's the player colliding
         if (collision.gameObject.CompareTag("Player"))
         {
+            // only do the logic when the player is on top of the bubble
+            Debug.Log(collision.contacts[0].normal);
+            if (collision.contacts[0].normal.y > 0) return;
             // Make the player a child of the bubble
             collision.transform.SetParent(transform, true);
+            _shouldMove = false;    // Stop the bubble from moving
         }
     }
 
@@ -144,6 +150,7 @@ public class BubbleBehaviour : MonoBehaviour
         {
             // Reset the player's parent to null
             collision.transform.SetParent(null, true);
+            _shouldMove = true;    // Allow the bubble to move again
         }
     }
 
