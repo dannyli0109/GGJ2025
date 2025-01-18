@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 865602130585688236}
   - component: {fileID: 7286155138849170493}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: leftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4103349204504775029}
   - component: {fileID: 1741813853633781084}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: leftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2017210614626177299}
   - component: {fileID: 1994915955727957628}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: -4657600921522017824}
   - component: {fileID: 6317074865756242613}
   - component: {fileID: 859462055300132319}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CutePlayer2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4683102636419854580}
   - component: {fileID: 3979423516983682496}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 49043342086243945}
   - component: {fileID: 2202056288346907389}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
