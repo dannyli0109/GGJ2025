@@ -18,23 +18,19 @@ public class InputBuffer
 
 public class PlayerInput : MonoBehaviour
 {
-	PlayerInputActions inputActions;
+	protected PlayerInputActions inputActions;
 
-	public float horizontal => inputActions.GamePlay.Horizontal.ReadValue<float>();
-	public Vector2 aim => inputActions.GamePlay.Aim.ReadValue<Vector2>();
+	public virtual float horizontal => inputActions.GamePlay.Horizontal.ReadValue<float>();
 	public List<InputBuffer> bufferList;
 
-	public bool Attack => inputActions.GamePlay.Attack.WasPressedThisFrame(); // ¹¥»÷
-	public bool Switch => inputActions.GamePlay.Switch.WasPressedThisFrame(); // ÇÐ»»ÎäÆ÷
-	public bool Reload => inputActions.GamePlay.Reload.WasPressedThisFrame(); // ×°Ìîµ¯Ò©
-	public bool Sprint => inputActions.GamePlay.Sprint.WasPressedThisFrame(); // ³å´Ì
-	public bool Down => inputActions.GamePlay.Down.IsPressed(); // ÏÂ¶×
+	public virtual bool Interact => inputActions.GamePlay.Interact.WasPressedThisFrame(); // ¹¥»÷
+	public virtual bool Down => inputActions.GamePlay.Down.IsPressed(); // ÏÂ¶×
 	public bool Move => horizontal != 0f;
 
-	Dictionary<string, InputBuffer> bufferDict;
-	Dictionary<string, Coroutine> bufferCoroutineDict;
+	protected Dictionary<string, InputBuffer> bufferDict;
+	protected Dictionary<string, Coroutine> bufferCoroutineDict;
 
-	void Awake()
+	protected virtual void Awake()
 	{
 		inputActions = new PlayerInputActions();
 		bufferDict = new Dictionary<string, InputBuffer>();
@@ -55,36 +51,23 @@ public class PlayerInput : MonoBehaviour
 		DisableGameplayInputs();
 	}
 
-	public void EnableGameplayInputs()
+	public virtual void EnableGameplayInputs()
 	{
 		inputActions.GamePlay.Enable();
 		inputActions.GamePlay.Jump.performed += OnJumpPerformed;
-		inputActions.GamePlay.Sprint.performed += OnSprintPerformed;
 	}
 
-	public void DisableGameplayInputs()
+	public virtual void DisableGameplayInputs()
 	{
 		inputActions.GamePlay.Disable();
 		inputActions.GamePlay.Jump.performed -= OnJumpPerformed;
-		inputActions.GamePlay.Sprint.performed -= OnSprintPerformed;
 	}
 
-	private void OnJumpPerformed(InputAction.CallbackContext ctx)
+	protected void OnJumpPerformed(InputAction.CallbackContext ctx)
 	{
 		if (ctx.interaction is PressInteraction)
 		{
 			SetInputBufferTimer("Jump");
-		}
-	}
-
-	private void OnSprintPerformed(InputAction.CallbackContext ctx)
-	{
-		if (ctx.interaction is PressInteraction)
-		{
-			if (horizontal != 0)
-			{
-				SetInputBufferTimer("Sprint", Mathf.Sign(horizontal));
-			}
 		}
 	}
 
