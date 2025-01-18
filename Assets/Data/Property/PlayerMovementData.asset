@@ -20,10 +20,11 @@ MonoBehaviour:
   deceleration: 3
   airAcceleration: 6
   fallAcceleration: 3
+  fallGravityScale: 1.5
   sprintSpeed: 5
   sprintTime: 0.3
   sprintCD: 0
-  landJumpHeight: 2
+  landJumpHeight: 1.5
   airJumpHeight: 1
   jumpCount: 1
-  coyoteTime: 0.2
+  coyoteTime: 0.15
