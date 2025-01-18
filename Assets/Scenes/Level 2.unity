@@ -1316,7 +1316,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.33276528, g: 0.6226415, b: 0, a: 1}
+  m_Color: {r: 0.65882355, g: 0.56078434, b: 0.64705884, a: 1}
   m_Origin: {x: -20, y: -11, z: 0}
   m_Size: {x: 41, y: 24, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -1448,15 +1448,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2038792349904376510, guid: bc38b6a858aa7b44d81e4aa13dbb9df3, type: 3}
       propertyPath: m_Color.b
-      value: 0.1514774
+      value: 0.37468678
       objectReference: {fileID: 0}
     - target: {fileID: 2038792349904376510, guid: bc38b6a858aa7b44d81e4aa13dbb9df3, type: 3}
       propertyPath: m_Color.g
-      value: 0.58682615
+      value: 0.2720754
       objectReference: {fileID: 0}
     - target: {fileID: 2038792349904376510, guid: bc38b6a858aa7b44d81e4aa13dbb9df3, type: 3}
       propertyPath: m_Color.r
-      value: 0.8679245
+      value: 0.3886792
       objectReference: {fileID: 0}
     - target: {fileID: 2038792349904376510, guid: bc38b6a858aa7b44d81e4aa13dbb9df3, type: 3}
       propertyPath: m_Tiles.Array.size
@@ -5632,9 +5632,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0022123894
-    width: 2.709838
-    height: 1.1681416
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
@@ -5664,7 +5664,7 @@ Transform:
   m_GameObject: {fileID: 1728788499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.045579, y: -2.0087914, z: -10}
+  m_LocalPosition: {x: -6.0591288, y: -2.0087914, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
