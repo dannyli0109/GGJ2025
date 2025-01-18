@@ -23,8 +23,8 @@ namespace HFSM
 		public override void OnEnter()
 		{
 			input.UseBuffer("Jump");
-			movementController.JumpCount--;
 			movementController.Jump();
+			movementController.JumpCount--;
 			base.OnEnter();
 		}
 	}
