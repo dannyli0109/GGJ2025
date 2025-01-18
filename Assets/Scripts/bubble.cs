@@ -34,28 +34,9 @@ public class BubbleSpawner : MonoBehaviour
     public float destroyTime = 10f;
     [Tooltip("泡泡破裂音效组")]
     public List<AudioClip> popClips;
-    PlayerInput input;
     private GameObject _bubble;
 
-    private void Awake()
-    {
-        input = GetComponent<PlayerInput>();
-    }
-
-    private void Update()
-    {
-        // Spawn a bubble whenever the player presses 'F'
-        if (input.Interact)
-        {
-            if (_bubble != null)
-            {
-                _bubble.GetComponent<BubbleBehaviour>().destroyBubble();
-            }
-            _bubble = SpawnBubble();
-        }
-    }
-
-    private GameObject SpawnBubble()
+    public GameObject SpawnBubble()
     {
         // offset by gameobject's facing direction
         float xOffset = transform.localScale.x * 2f;
