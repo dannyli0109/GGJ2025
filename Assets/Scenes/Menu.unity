@@ -485,13 +485,13 @@ MonoBehaviour:
   persistent: 1
   autoUnparentOnAwake: 1
   bgmClips:
+  - {fileID: 8300000, guid: eb227cdaf7a833640896d087dac5a47e, type: 3}
+  - {fileID: 8300000, guid: 053389044cab5b54394d0e00bf79cf3f, type: 3}
+  - {fileID: 8300000, guid: 0bf4eb2717302b84bb0edc11d841cd77, type: 3}
+  - {fileID: 8300000, guid: 3812b518a23f3a245b96aad60d7d376b, type: 3}
   - {fileID: 8300000, guid: 35615558fa469ad4f8776adaf37653c2, type: 3}
   - {fileID: 8300000, guid: a1fa01ed4ff493340bc88dcc41f295b8, type: 3}
-  - {fileID: 8300000, guid: 053389044cab5b54394d0e00bf79cf3f, type: 3}
-  - {fileID: 8300000, guid: 3812b518a23f3a245b96aad60d7d376b, type: 3}
-  - {fileID: 8300000, guid: a1fa01ed4ff493340bc88dcc41f295b8, type: 3}
-  - {fileID: 8300000, guid: 053389044cab5b54394d0e00bf79cf3f, type: 3}
-  - {fileID: 8300000, guid: 3812b518a23f3a245b96aad60d7d376b, type: 3}
+  - {fileID: 8300000, guid: 1cc4465165ab6e24591f86dbd56d8b5b, type: 3}
 --- !u!4 &1250131091
 Transform:
   m_ObjectHideFlags: 0
@@ -703,10 +703,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00124533
+    x: 0
     y: 0
-    width: 0.996264
-    height: 1
+    width: 2.327273
+    height: 1.0038023
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
