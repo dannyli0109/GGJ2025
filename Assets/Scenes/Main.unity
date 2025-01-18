@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 8453551399378098226, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -397,6 +401,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1741813853633781084, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 439222f7c1d8f8746b50a8bb2a89e46f, type: 3}
+    - target: {fileID: 1994915955727957628, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0fd723a7715c6f248be0c67902cd3e37, type: 3}
     - target: {fileID: 2086064545993363811, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.4
@@ -437,9 +449,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2202056288346907389, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 25f2143db28f93e4c988148f63df1ee7, type: 3}
+    - target: {fileID: 3979423516983682496, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96142cb1ab6f52847a735093cae77d8a, type: 3}
     - target: {fileID: 5634774651864035988, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
       propertyPath: m_Name
       value: CutePlayer2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286155138849170493, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 23ac7a003d5c0ee47afaf7555d0ca34a, type: 3}
+    - target: {fileID: 7374141257291678555, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0770a54b1f80e5a4bbf2f01b912e5fff, type: 3}
+    - target: {fileID: 7374141257291678555, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
