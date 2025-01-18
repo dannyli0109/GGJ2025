@@ -26,16 +26,13 @@ public class MovementController : MonoBehaviour
 	float landJumpSpeed;
 	float airJumpSpeed;
 
-	[HideInInspector] public bool towardRight = true;
 	[HideInInspector] public bool inCoyoteTime = false;
-	//[HideInInspector] public bool isOnGround => rig.velocity.y == 0 && groundDetector.groundCollider != null;
 	[HideInInspector] public bool isOnGround => IsOnGround();
 
 	PlayerInput input;
 	BoxCollider2D col;
 	Rigidbody2D rig;
 	Camera mainCamera;
-	GroundDetector groundDetector;
 
 	#region System Function
 	private void Awake()
@@ -43,7 +40,6 @@ public class MovementController : MonoBehaviour
 		input = GameManager.Instance.input;
 		col = GetComponent<BoxCollider2D>();
 		rig = GetComponent<Rigidbody2D>();
-		groundDetector = GetComponentInChildren<GroundDetector>();
 		mainCamera = Camera.main;
 		landJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.landJumpHeight);
 		airJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.airJumpHeight);
@@ -124,36 +120,17 @@ public class MovementController : MonoBehaviour
 	// 更新朝向
 	public void UpdateToward()
 	{
-		Vector2 pos = mainCamera.WorldToScreenPoint(transform.position);
-		Vector2 dir = input.aim - pos;
 		Vector3 scale = transform.localScale;
-		if (dir.x * scale.x < 0)
+		if (input.horizontal * scale.x < 0)
 		{
-			scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
+			scale.x = Mathf.Sign(input.horizontal) * Mathf.Abs(scale.x);
 			transform.localScale = scale;
-			towardRight = dir.x > 0;
 		}
 	}
 
 	public void SprintCountDown()
 	{
 		StartCoroutine(SprintCountDownProgress(movementData.sprintCD));
-	}
-
-	public bool CanCrossDown()
-	{
-		groundDetector.Detect();
-		return isOnGround && groundDetector.groundCollider.CompareTag("Platform");
-	}
-
-	public void CrossDownPlatform()
-	{
-		if (CanCrossDown())
-		{
-			Collider2D platformCollider = groundDetector.groundCollider;
-			Physics2D.IgnoreCollision(col, platformCollider, true);
-			StartCoroutine(DelayFunc(() => Physics2D.IgnoreCollision(col, platformCollider, false), 0.5f));
-		}
 	}
 
 	public bool IsOnGround()

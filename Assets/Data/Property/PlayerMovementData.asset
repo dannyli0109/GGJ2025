@@ -25,5 +25,5 @@ MonoBehaviour:
   sprintCD: 0
   landJumpHeight: 0.6
   airJumpHeight: 0.7
-  jumpCount: 2
-  coyoteTime: 0
+  jumpCount: 1
+  coyoteTime: 0.2
