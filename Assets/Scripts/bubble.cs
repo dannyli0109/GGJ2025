@@ -64,9 +64,21 @@ public class BubbleSpawner : MonoBehaviour
         bubbleBehavior.popClips = popClips;
         bubbleBehavior.Init();
 
-
         return newBubble;
     }
+
+    public void checkExplode()
+    {
+        if (_bubble == null) return;
+        Debug.Log("Check Explode");
+        _bubble.GetComponent<BubbleBehaviour>().checkExplode();
+    }
+
+    public void onBubble(GameObject bubble)
+    {
+        _bubble = bubble;
+    }
+
 }
 /// <summary>
 /// Controls the movement and destruction of individual bubble objects.
@@ -96,6 +108,7 @@ public class BubbleBehaviour : MonoBehaviour
     float pushPower = 50;
     bool destroyed = false;
     AudioSource audioSource;
+    bool _shouldPop = false;
 
     private void Start()
     {
@@ -219,7 +232,9 @@ public class BubbleBehaviour : MonoBehaviour
             // Make the player a child of the bubble
             // collision.transform.SetParent(transform, true);
             _shouldMove = false;    // Stop the bubble from moving
+            _shouldPop = true;
 
+            collision.gameObject.GetComponent<BubbleSpawner>().onBubble(gameObject);
         }
     }
 
@@ -230,12 +245,9 @@ public class BubbleBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
             // Reset the player's parent to null
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
-
-
         }
     }
 
@@ -305,6 +317,15 @@ public class BubbleBehaviour : MonoBehaviour
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
         _horizontalDistance = 0;
+    }
+
+    public void checkExplode()
+    {
+        if (destroyed) return;
+        if (_shouldPop)
+        {
+            destroyBubble();
+        }
     }
 
 
