@@ -30,12 +30,18 @@ public class BubbleSpawner : MonoBehaviour
     [Tooltip("Max horizontal distance")]
     public float maxHorizontalDistance = 5f;
 
+    PlayerInput input;
     private GameObject _bubble;
+
+    private void Awake()
+    {
+        input = GetComponent<PlayerInput>();
+    }
 
     private void Update()
     {
         // Spawn a bubble whenever the player presses 'F'
-        if (Input.GetKeyDown(KeyCode.F))
+        if (input.Interact)
         {
             if (_bubble != null)
             {
