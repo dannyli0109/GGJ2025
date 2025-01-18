@@ -11,6 +11,7 @@ public class MovementController : MonoBehaviour
 	public Vector2 velocity => rig.velocity;
 	public bool jumpEnable => jumpCount > 0;
 	public bool sprintEnable = true;
+	[HideInInspector] public Vector3 spawnPos;
 	private int jumpCount;
 	public int JumpCount
 	{
@@ -45,6 +46,24 @@ public class MovementController : MonoBehaviour
 		airJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.airJumpHeight);
 		ResetJumpCount();
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Death"))
+		{
+			gameObject.transform.position = spawnPos;
+		}
+	}
+
+	private void OnEnable()
+	{
+		RecordSpawnPos();
+	}
+
+	private void OnDisable()
+	{
+		transform.position = spawnPos;
+	}
 	#endregion
 
 	public void ResetJumpCount()
@@ -54,6 +73,7 @@ public class MovementController : MonoBehaviour
 
 	public void Jump()
 	{
+		RecordSpawnPos();
 		float velocityX = rig.velocity.x;
 		//float velocityX = input.horizontal*movementData.speed;
 		//if (input.Move && input.horizontal*rig.velocity.x<0)
@@ -77,6 +97,11 @@ public class MovementController : MonoBehaviour
 				SetVelocity(velocityX, airJumpSpeed);
 			}
 		}
+	}
+
+	public void RecordSpawnPos()
+	{
+		spawnPos = transform.position;
 	}
 
 	public void SetFallGravityScale()
