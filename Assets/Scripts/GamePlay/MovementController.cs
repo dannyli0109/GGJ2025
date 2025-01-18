@@ -37,7 +37,7 @@ public class MovementController : MonoBehaviour
 	#region System Function
 	private void Awake()
 	{
-		input = GameManager.Instance.input;
+		input = GetComponent<PlayerInput>();
 		col = GetComponent<BoxCollider2D>();
 		rig = GetComponent<Rigidbody2D>();
 		mainCamera = Camera.main;
