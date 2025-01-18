@@ -39,6 +39,7 @@ public class BubbleSpawner : MonoBehaviour
         bubbleBehavior.destroyTime = data.destroyTime;
         bubbleBehavior.popClips = data.popClips;
         bubbleBehavior.blowClips = data.blowClips;
+        bubbleBehavior.bounceClips = data.bounceClips;
         bubbleBehavior.Init();
 
         return newBubble;
@@ -98,6 +99,7 @@ public class BubbleBehaviour : MonoBehaviour
 
     public List<AudioClip> popClips;
     public List<AudioClip> blowClips;
+    public List<AudioClip> bounceClips;
 
     private float _driftDirection;
     private float _distance = 0;
@@ -139,6 +141,12 @@ public class BubbleBehaviour : MonoBehaviour
     void PlayBlowAudio()
     {
         audioSource.clip = blowClips[UnityEngine.Random.Range(0, blowClips.Count)];
+        audioSource.Play();
+    }
+
+    void PlayBounceAudio()
+    {
+        audioSource.clip = bounceClips[UnityEngine.Random.Range(0, bounceClips.Count)];
         audioSource.Play();
     }
 
@@ -283,6 +291,19 @@ public class BubbleBehaviour : MonoBehaviour
         {
             destroyBubble();
         }
+
+        if (other.CompareTag("Player"))
+        {
+            // PlayBounceAudio();
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayBounceAudio();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -342,7 +363,6 @@ public class BubbleBehaviour : MonoBehaviour
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
         _horizontalDistance = 0;
-        Debug.Log(gameObject.transform.position);
     }
 
     public void checkExplode()
