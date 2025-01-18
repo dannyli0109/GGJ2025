@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BubbleDownOnStand : MonoBehaviour
@@ -5,6 +7,8 @@ public class BubbleDownOnStand : MonoBehaviour
     private Rigidbody2D _rb;
     public float gravityScale = 0.2f;
     private bool isStandOn = false;
+    private List<GameObject> gameObjects = new List<GameObject>();
+    private int _count = 0;
 
     private void Awake()
     {
@@ -19,29 +23,63 @@ public class BubbleDownOnStand : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            // down force
-            _rb.bodyType = RigidbodyType2D.Dynamic;
-            _rb.gravityScale = gravityScale;
-            isStandOn = true;
+            AddPlayer(collision.gameObject);
         }
     }
+
+    void AddPlayer(GameObject gameObject)
+    {
+        bool found = false;
+        for (int i = 0; i < gameObjects.Count; i++)
+        {
+            if (gameObjects[i] == gameObject)
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            gameObjects.Add(gameObject);
+        }
+        // down force
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+        _rb.gravityScale = gravityScale;
+    }
+
+    void RemovePlayer(GameObject gameObject)
+    {
+        for (int i = 0; i < gameObjects.Count; i++)
+        {
+            if (gameObjects[i] == gameObject)
+            {
+                gameObjects.RemoveAt(i);
+                break;
+            }
+        }
+
+        if (gameObjects.Count == 0)
+        {
+            _rb.bodyType = RigidbodyType2D.Kinematic;
+            _rb.gravityScale = 0;
+        }
+    }
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // up force
-            _rb.bodyType = RigidbodyType2D.Kinematic;
-            _rb.gravityScale = 0;
-            isStandOn = false;
+            RemovePlayer(collision.gameObject);
         }
     }
 
     private void Update()
     {
-        if (isStandOn)
+        if (gameObjects.Count > 0)
         {
-            _rb.velocity = new Vector2(0, -gravityScale);
+            Debug.Log(gameObjects.Count);
+            _rb.velocity = new Vector2(0, -gravityScale * gameObjects.Count);
         }
         else
         {
