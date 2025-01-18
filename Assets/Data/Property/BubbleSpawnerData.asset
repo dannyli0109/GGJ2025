@@ -18,7 +18,7 @@ MonoBehaviour:
   bouncebackDistance: 0.1
   pushHorizontalSpeed: 3
   pushVerticalSpeed: 3
-  maxHorizontalDistance: 5
+  maxHorizontalDistance: 4
   destroyTime: 20
   popClips:
   - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
