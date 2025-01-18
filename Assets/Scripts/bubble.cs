@@ -179,6 +179,7 @@ public class BubbleBehaviour : MonoBehaviour
                 if (_horizontalDistance > maxHorizontalDistance)
                 {
                     _horizontalDistance = maxHorizontalDistance;
+                    _hasBeenPushed = false;
                 }
 
                 float percent = _horizontalDistance / maxHorizontalDistance;
@@ -215,6 +216,12 @@ public class BubbleBehaviour : MonoBehaviour
                 {
                     _driftDirection *= -1;
                     _distance = 0;
+                }
+
+                float percent = _horizontalDistance / maxHorizontalDistance;
+                if (percent < 0.95 && _hasBeenPushed)
+                {
+                    movement.x = 0;
                 }
 
                 // Apply the movement
