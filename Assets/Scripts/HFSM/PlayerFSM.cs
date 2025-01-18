@@ -53,7 +53,7 @@ namespace HFSM
             //normalFsm.AddState("AirJump", new PlayerStateJump(this, input));
 
             //normalFsm.AddTransition("Fall", "AirJump", condition: CheckJump);
-            normalFsm.AddTransition("Fall", "Idle", condition: t => movementController.isOnGround, onTransition: t => movementController.RecordSpawnPos());
+            normalFsm.AddTransition("Fall", "Idle", condition: t => movementController.isOnGround);
             normalFsm.AddTwoWayTransition("Idle", "Run", t => input.Move);//TODO
             normalFsm.AddTransition("Idle", "Jump", condition: CheckJump);
             normalFsm.AddTransition("Idle", "Bubble", condition: t => input.Interact);
