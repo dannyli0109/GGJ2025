@@ -23,6 +23,7 @@ public class PlayerMovementData : ScriptableObject
     public float airAcceleration;
     //[FoldoutGroup("º”ÀŸ∂»")]
     public float fallAcceleration;
+    public float fallGravityScale;
 
 	//[FoldoutGroup("≥Â¥Ã")]
     public float sprintSpeed;
