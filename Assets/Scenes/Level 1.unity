@@ -1009,10 +1009,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -9, y: 10}
-      - {x: -9, y: -10}
-      - {x: 9, y: -10}
-      - {x: 9, y: 10}
+    - - {x: -10, y: 10}
+      - {x: -10, y: -10}
+      - {x: 10, y: -10}
+      - {x: 10, y: 10}
   m_UseDelaunayMesh: 0
 --- !u!4 &657803323 stripped
 Transform:
@@ -5469,8 +5469,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 2.7336683
+    height: 1.1785715
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
@@ -5500,7 +5500,7 @@ Transform:
   m_GameObject: {fileID: 1728788499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6071434, y: -0.5, z: -10}
+  m_LocalPosition: {x: 0.6071434, y: -0.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
