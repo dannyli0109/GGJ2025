@@ -4,6 +4,9 @@ using System.Collections.Generic;
 [CreateAssetMenu(menuName = "Data/Property/BubbleSpawnerData", fileName = "BubbleSpawnerData")]
 public class BubbleSpawnerData : ScriptableObject
 {
+    [Header("Bubble Prefab")]
+    [Tooltip("Drag and drop your bubble prefab here.")]
+    public GameObject bubblePrefab;
     [Header("Movement Settings")]
     [Tooltip("Upward speed for bubbles.")]
     public float bubbleSpeed = 0.1f;

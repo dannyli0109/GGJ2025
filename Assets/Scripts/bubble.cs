@@ -11,31 +11,7 @@ using UnityEngine;
 /// </summary>
 public class BubbleSpawner : MonoBehaviour
 {
-    [Header("Bubble Prefab")]
-    [Tooltip("Drag and drop your bubble prefab here.")]
-    public GameObject bubblePrefab;
-
-    [Header("Spawn Settings")]
-    // [Tooltip("Horizontal range around the spawner's X-position where bubbles can appear.")]
-    // public float spawnRange = 5f;
-
-    [Header("Movement Settings")]
-    [Tooltip("Upward speed for bubbles.")]
-    public float bubbleSpeed = 0.1f;
-    [Tooltip("The range of horizontal drifting speed.")]
-    public float horizontalDrift = 0.3f;
-    [Tooltip("The distance to move opposite direction")]
-    public float bouncebackDistance = 1f;
-    [Tooltip("Push horizontal speed")]
-    public float pushHorizontalSpeed = 4f;
-    [Tooltip("Push vertical speed")]
-    public float pushVerticalSpeed = 2f;
-    [Tooltip("Max horizontal distance")]
-    public float maxHorizontalDistance = 5f;
-    [Tooltip("Time to destroy the bubble")]
-    public float destroyTime = 10f;
-    [Tooltip("泡泡破裂音效组")]
-    public List<AudioClip> popClips;
+    public BubbleSpawnerData data;
     private GameObject[] _bubbles = new GameObject[2];
 
     public GameObject SpawnBubble()
@@ -48,19 +24,19 @@ public class BubbleSpawner : MonoBehaviour
                                        transform.position.z);
 
         // Instantiate the bubble
-        GameObject newBubble = Instantiate(bubblePrefab, spawnPos, Quaternion.identity);
+        GameObject newBubble = Instantiate(data.bubblePrefab, spawnPos, Quaternion.identity);
 
         // Add the BubbleBehaviour script to control the bubble's movement
         BubbleBehaviour bubbleBehavior = newBubble.AddComponent<BubbleBehaviour>();
-        bubbleBehavior.verticalSpeed = bubbleSpeed;
-        bubbleBehavior.horizontalDrift = horizontalDrift;
-        bubbleBehavior.bouncebackDistance = bouncebackDistance;
+        bubbleBehavior.verticalSpeed = data.bubbleSpeed;
+        bubbleBehavior.horizontalDrift = data.horizontalDrift;
+        bubbleBehavior.bouncebackDistance = data.bouncebackDistance;
         bubbleBehavior.initialDir = xOffset > 0 ? 1 : -1;
-        bubbleBehavior.pushHorizontalSpeed = pushHorizontalSpeed;
-        bubbleBehavior.pushVerticalSpeed = pushVerticalSpeed;
-        bubbleBehavior.maxHorizontalDistance = maxHorizontalDistance;
-        bubbleBehavior.destroyTime = destroyTime;
-        bubbleBehavior.popClips = popClips;
+        bubbleBehavior.pushHorizontalSpeed = data.pushHorizontalSpeed;
+        bubbleBehavior.pushVerticalSpeed = data.pushVerticalSpeed;
+        bubbleBehavior.maxHorizontalDistance = data.maxHorizontalDistance;
+        bubbleBehavior.destroyTime = data.destroyTime;
+        bubbleBehavior.popClips = data.popClips;
         bubbleBehavior.Init();
 
         return newBubble;

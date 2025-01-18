@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399c6847b118a4a25ad4e4879358053a, type: 3}
   m_Name: BubbleSpawnerData
   m_EditorClassIdentifier: 
-  bubbleSpeed: 0.1
-  horizontalDrift: 0.3
-  bouncebackDistance: 1
-  pushHorizontalSpeed: 4
-  pushVerticalSpeed: 2
+  bubblePrefab: {fileID: 4618447527710482737, guid: e98bd66a7b761844799e05504f49496f, type: 3}
+  bubbleSpeed: 0.15
+  horizontalDrift: 0.25
+  bouncebackDistance: 0.25
+  pushHorizontalSpeed: 2.6
+  pushVerticalSpeed: 1
   maxHorizontalDistance: 5
   destroyTime: 10
-  popClips: []
+  popClips:
+  - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
+  - {fileID: 8300000, guid: c60e6f5e688510e4a84a7cb1c83cd8ef, type: 3}

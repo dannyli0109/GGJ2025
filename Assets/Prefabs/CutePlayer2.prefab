@@ -598,17 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355325722a19b42a4aa75b6bcba70d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 4618447527710482737, guid: e98bd66a7b761844799e05504f49496f, type: 3}
-  bubbleSpeed: 0.3
-  horizontalDrift: 0.5
-  bouncebackDistance: 0.5
-  pushHorizontalSpeed: 4
-  pushVerticalSpeed: 2
-  maxHorizontalDistance: 5
-  destroyTime: 10
-  popClips:
-  - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
-  - {fileID: 8300000, guid: c60e6f5e688510e4a84a7cb1c83cd8ef, type: 3}
+  data: {fileID: 11400000, guid: 3df91658da68e42f88c5db433d4ebf09, type: 2}
 --- !u!1 &7993722651469698273
 GameObject:
   m_ObjectHideFlags: 0
