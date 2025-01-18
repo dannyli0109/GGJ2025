@@ -64,6 +64,14 @@ public class MenuEventSystemHandler : MonoBehaviour
 		scaleDeselectTween?.Kill(true);
 	}
 
+	private void Update()
+	{
+		if (Input.anyKeyDown && EventSystem.current.currentSelectedGameObject == null)
+		{
+			EventSystem.current.SetSelectedGameObject(lastSelectable.gameObject);
+		}
+	}
+
 	protected virtual void AddSelectionListeners(Selectable selectable)
 	{
 		EventTrigger trigger = selectable.gameObject.GetComponent<EventTrigger>();
