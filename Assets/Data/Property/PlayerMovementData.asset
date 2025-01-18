@@ -23,7 +23,7 @@ MonoBehaviour:
   sprintSpeed: 5
   sprintTime: 0.3
   sprintCD: 0
-  landJumpHeight: 0.6
-  airJumpHeight: 0.7
+  landJumpHeight: 2
+  airJumpHeight: 1
   jumpCount: 1
   coyoteTime: 0.2
