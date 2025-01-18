@@ -416,6 +416,7 @@ MonoBehaviour:
     minNormalAngle: 80
     maxNormalAngle: 100
   sprintEnable: 1
+  spawnPos: {x: 0, y: 0, z: 0}
   inCoyoteTime: 0
 --- !u!114 &-4657600921522017824
 MonoBehaviour:
@@ -468,6 +469,10 @@ MonoBehaviour:
   pushHorizontalSpeed: 4
   pushVerticalSpeed: 2
   maxHorizontalDistance: 5
+  destroyTime: 10
+  popClips:
+  - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
+  - {fileID: 8300000, guid: c60e6f5e688510e4a84a7cb1c83cd8ef, type: 3}
 --- !u!1 &7993722651469698273
 GameObject:
   m_ObjectHideFlags: 0
