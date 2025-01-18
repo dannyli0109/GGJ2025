@@ -12,10 +12,6 @@ public class GameManager : SingletonMono<GameManager>
 	{
 		base.Awake();
 		bgmSource = GetComponent<AudioSource>();
-	}
-
-	private void Start()
-	{
 		SwitchBgm(0);
 	}
 
@@ -28,6 +24,7 @@ public class GameManager : SingletonMono<GameManager>
 	public void SwitchScene(int id)
 	{
 		SceneManager.LoadScene(id);
+		SwitchBgm(id);
 	}
 
 	public void SwitchBgm(int id)
