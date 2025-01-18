@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 /// <summary>
@@ -158,16 +159,26 @@ public class BubbleBehaviour : MonoBehaviour
                     _hasBeenPushed = false;
                 }
 
-                float percent = _horizontalDistance / maxHorizontalDistance;
-                float speed = pushHorizontalSpeed * (1 - percent);
-                Vector3 movement = new Vector3(
-                    _pushDirection.x * speed * Time.deltaTime,
-                    _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
-                    0f
-                );
+                if (_hasBeenPushed)
+                {
+                    // faster at the beginning
+                    float percent = _horizontalDistance / maxHorizontalDistance;
+                    // if (percent > 0.95) percent = 1; and snap to max distance
+                    float speed = pushHorizontalSpeed * (1 - percent * percent * percent * percent);
+                    Vector3 movement = new Vector3(
+                        _pushDirection.x * speed * Time.deltaTime,
+                        _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
+                        0f
+                    );
 
-                transform.Translate(movement);
-                _horizontalDistance += Mathf.Abs(movement.x);
+                    if (_horizontalDistance + Mathf.Abs(movement.x) > maxHorizontalDistance)
+                    {
+                        movement.x = maxHorizontalDistance - _horizontalDistance;
+                    }
+
+                    transform.Translate(movement);
+                    _horizontalDistance += Mathf.Abs(movement.x);
+                }
 
                 // If you still want the bubble to be destroyed off-screen:
             }
@@ -322,6 +333,7 @@ public class BubbleBehaviour : MonoBehaviour
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
         _horizontalDistance = 0;
+        Debug.Log(gameObject.transform.position);
     }
 
     public void checkExplode()
