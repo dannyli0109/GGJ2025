@@ -26,11 +26,11 @@ public class PlayerMovementData : ScriptableObject
     public float fallGravityScale;
 
 	//[FoldoutGroup("³å´Ì")]
-    public float sprintSpeed;
+    //public float sprintSpeed;
     //[FoldoutGroup("³å´Ì")]
-    public float sprintTime;
+    //public float sprintTime;
     //[FoldoutGroup("³å´Ì")]
-    public float sprintCD;
+    //public float sprintCD;
 	//[FoldoutGroup("³å´Ì")]
 	//public EasingLerps.EasingInOutType sprintInOutType;
 	//[FoldoutGroup("³å´Ì")]
@@ -39,7 +39,7 @@ public class PlayerMovementData : ScriptableObject
     //[FoldoutGroup("ÌøÔ¾")]
     public float landJumpHeight;
     //[FoldoutGroup("ÌøÔ¾")]
-    public float airJumpHeight;
+    //public float airJumpHeight;
     //[FoldoutGroup("ÌøÔ¾")]
     public int jumpCount;
 
