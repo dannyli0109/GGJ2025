@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8da1e5e243029e41aabe6e28e0256f7, type: 3}
   m_Name: PlayerMovementData
   m_EditorClassIdentifier: 
-  speed: 2.7
+  speed: 2.6
   maxFallSpeed: 10
-  maxRiseSpeed: 0
+  maxRiseSpeed: 10
   noAccelerateOnGround: 1
   acceleration: 3
   deceleration: 3
-  airAcceleration: 12
-  fallAcceleration: 12
-  fallGravityScale: 1.5
-  landJumpHeight: 1.9
+  airAcceleration: 20
+  fallAcceleration: 20
+  fallGravityScale: 1.2
+  landJumpHeight: 1.6
   jumpCount: 1
   coyoteTime: 0

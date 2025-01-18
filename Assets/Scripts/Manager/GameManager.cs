@@ -19,10 +19,15 @@ public class GameManager : SingletonMono<GameManager>
 		SwitchBgm(0);
 	}
 
+	public void SwitchNextScene()
+	{
+		int id = SceneManager.GetActiveScene().buildIndex;
+		SwitchScene(id + 1);
+	}
+
 	public void SwitchScene(int id)
 	{
 		SceneManager.LoadScene(id);
-
 	}
 
 	public void SwitchBgm(int id)

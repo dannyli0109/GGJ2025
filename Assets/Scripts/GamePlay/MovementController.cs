@@ -45,6 +45,7 @@ public class MovementController : MonoBehaviour
 		landJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.landJumpHeight);
 		//airJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.airJumpHeight);
 		ResetJumpCount();
+		RecordSpawnPos();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -57,7 +58,7 @@ public class MovementController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		RecordSpawnPos();
+		//RecordSpawnPos();
 	}
 
 	private void OnDisable()
