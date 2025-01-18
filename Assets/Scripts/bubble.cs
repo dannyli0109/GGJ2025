@@ -36,7 +36,7 @@ public class BubbleSpawner : MonoBehaviour
     public float destroyTime = 10f;
     [Tooltip("泡泡破裂音效组")]
     public List<AudioClip> popClips;
-    private GameObject _bubble;
+    private GameObject[] _bubbles = new GameObject[2];
 
     public GameObject SpawnBubble()
     {
@@ -68,14 +68,35 @@ public class BubbleSpawner : MonoBehaviour
 
     public void checkExplode()
     {
-        if (_bubble == null) return;
-        Debug.Log("Check Explode");
-        _bubble.GetComponent<BubbleBehaviour>().checkExplode();
+        for (int i = 0; i < _bubbles.Length; i++)
+        {
+            if (_bubbles[i] == null) continue;
+            _bubbles[i].GetComponent<BubbleBehaviour>().checkExplode();
+        }
     }
 
     public void onBubble(GameObject bubble)
     {
-        _bubble = bubble;
+        for (int i = 0; i < _bubbles.Length; i++)
+        {
+            if (_bubbles[i] == null)
+            {
+                _bubbles[i] = bubble;
+                break;
+            }
+        }
+    }
+
+    public void offBubble(GameObject bubble)
+    {
+        for (int i = 0; i < _bubbles.Length; i++)
+        {
+            if (_bubbles[i] == bubble)
+            {
+                _bubbles[i] = null;
+                break;
+            }
+        }
     }
 
 }
@@ -234,8 +255,6 @@ public class BubbleBehaviour : MonoBehaviour
             // Make the player a child of the bubble
             // collision.transform.SetParent(transform, true);
             _shouldMove = false;    // Stop the bubble from moving
-            _shouldPop = true;
-
             collision.gameObject.GetComponent<BubbleSpawner>().onBubble(gameObject);
         }
     }
@@ -250,6 +269,7 @@ public class BubbleBehaviour : MonoBehaviour
             // Reset the player's parent to null
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
+            collision.gameObject.GetComponent<BubbleSpawner>().offBubble(gameObject);
         }
     }
 
@@ -324,10 +344,7 @@ public class BubbleBehaviour : MonoBehaviour
     public void checkExplode()
     {
         if (destroyed) return;
-        if (_shouldPop)
-        {
-            destroyBubble();
-        }
+        destroyBubble();
     }
 
 
