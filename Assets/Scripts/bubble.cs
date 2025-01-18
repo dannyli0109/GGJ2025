@@ -94,12 +94,10 @@ public class BubbleBehaviour : MonoBehaviour
     float pushPower = 50;
     bool destroyed = false;
     AudioSource audioSource;
-    Rigidbody2D rb;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        rb = GetComponent<Rigidbody2D>();
         // Randomize the direction of the horizontal drift
         // _driftDirection = 1;
         // Destroy the bubble after a set time
@@ -226,7 +224,6 @@ public class BubbleBehaviour : MonoBehaviour
             // Reset the player's parent to null
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
-            rb.simulated = false;
         }
     }
 
@@ -308,13 +305,13 @@ public class BubbleBehaviour : MonoBehaviour
     {
         // For safety, ensure no child remains parented
         // (especially the player, if still attached).
-        // for (int i = transform.childCount - 1; i >= 0; i--)
-        // {
-        //     Transform child = transform.GetChild(i);
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = transform.GetChild(i);
 
-        //     // If you're specifically looking for "Player", do:
-        //     if (child.CompareTag("Player"))
-        //         child.SetParent(null, true);
-        // }
+            // If you're specifically looking for "Player", do:
+            if (child.CompareTag("Player"))
+                child.SetParent(null, true);
+        }
     }
 }

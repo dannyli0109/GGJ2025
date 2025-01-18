@@ -10,7 +10,6 @@ public class BubbleDownOnStand : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         // Start as Kinematic, no gravity
         _rb.bodyType = RigidbodyType2D.Kinematic;
-        _rb.gravityScale = 0f;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
@@ -19,8 +18,7 @@ public class BubbleDownOnStand : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.contacts[0].normal.y > 0) return;
-            // / Switch to Dynamic, enabling gravity
+            // down force
             _rb.bodyType = RigidbodyType2D.Dynamic;
             _rb.gravityScale = gravityScale;
         }
@@ -30,11 +28,9 @@ public class BubbleDownOnStand : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Revert to Kinematic
+            // up force
             _rb.bodyType = RigidbodyType2D.Kinematic;
-            _rb.gravityScale = 0f;
-            // Optionally also zero out velocity
-            _rb.velocity = Vector2.zero;
+            _rb.gravityScale = 0;
         }
     }
 }
