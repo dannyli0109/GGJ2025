@@ -44,6 +44,10 @@ public class GameManager : SingletonMono<GameManager>
         {
             Restart();
         }
+        if(Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SwitchScene(0);
+        }
     }
 
     public void Restart()
