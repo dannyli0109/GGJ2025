@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 /// <summary>
@@ -92,10 +94,12 @@ public class BubbleBehaviour : MonoBehaviour
     float pushPower = 50;
     bool destroyed = false;
     AudioSource audioSource;
+    Rigidbody2D rb;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
         // Randomize the direction of the horizontal drift
         // _driftDirection = 1;
         // Destroy the bubble after a set time
@@ -106,6 +110,7 @@ public class BubbleBehaviour : MonoBehaviour
     public void destroyBubble()
     {
         if (destroyed) return;
+        GetComponent<Collider2D>().enabled = false;
         PlayPopAudio();
         destroyed = true;
         GameObject bubble = gameObject.transform.GetChild(0).gameObject;
@@ -202,11 +207,12 @@ public class BubbleBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // only do the logic when the player is on top of the bubble
-            Debug.Log(collision.contacts[0].normal);
+            // Debug.Log(collision.contacts[0].normal);
             if (collision.contacts[0].normal.y > 0) return;
             // Make the player a child of the bubble
             // collision.transform.SetParent(transform, true);
             _shouldMove = false;    // Stop the bubble from moving
+
         }
     }
 
@@ -220,6 +226,7 @@ public class BubbleBehaviour : MonoBehaviour
             // Reset the player's parent to null
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
+            rb.simulated = false;
         }
     }
 
@@ -291,7 +298,6 @@ public class BubbleBehaviour : MonoBehaviour
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
         _distance = 0;
-
     }
 
 
