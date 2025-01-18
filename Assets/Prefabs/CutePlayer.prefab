@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3df91658da68e42f88c5db433d4ebf09, type: 2}
+  bubbleColor: {r: 0.89411765, g: 0.99215686, b: 0.9882353, a: 1}
 --- !u!61 &5294285831015685688
 BoxCollider2D:
   m_ObjectHideFlags: 0
