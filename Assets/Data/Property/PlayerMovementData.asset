@@ -27,4 +27,4 @@ MonoBehaviour:
   landJumpHeight: 1.5
   airJumpHeight: 1
   jumpCount: 1
-  coyoteTime: 0.2
+  coyoteTime: 0.15
