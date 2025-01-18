@@ -252,6 +252,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3826583633739752399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994978646916288555}
+  - component: {fileID: 3134169033276682074}
+  m_Layer: 3
+  m_Name: GroundDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994978646916288555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826583633739752399}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2086064545993363811}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3134169033276682074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826583633739752399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6fa24f100b11dd4c89f445788dda270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCollider: {fileID: 0}
+  radius: 0.4
 --- !u!1 &4392938485296941447
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +427,7 @@ Transform:
   - {fileID: 865602130585688236}
   - {fileID: 2017210614626177299}
   - {fileID: 4683102636419854580}
+  - {fileID: 994978646916288555}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3025404823945334161
@@ -471,7 +521,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &8903057359865301348
 MonoBehaviour:
@@ -503,6 +553,7 @@ MonoBehaviour:
   sprintEnable: 1
   spawnPos: {x: 0, y: 0, z: 0}
   inCoyoteTime: 0
+  groundDetector: {fileID: 0}
 --- !u!114 &-4657600921522017824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,17 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355325722a19b42a4aa75b6bcba70d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 4618447527710482737, guid: e98bd66a7b761844799e05504f49496f, type: 3}
-  bubbleSpeed: 0.3
-  horizontalDrift: 0.5
-  bouncebackDistance: 0.5
-  pushHorizontalSpeed: 4
-  pushVerticalSpeed: 2
-  maxHorizontalDistance: 5
-  destroyTime: 10
-  popClips:
-  - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
-  - {fileID: 8300000, guid: c60e6f5e688510e4a84a7cb1c83cd8ef, type: 3}
+  data: {fileID: 11400000, guid: 3df91658da68e42f88c5db433d4ebf09, type: 2}
 --- !u!1 &7993722651469698273
 GameObject:
   m_ObjectHideFlags: 0

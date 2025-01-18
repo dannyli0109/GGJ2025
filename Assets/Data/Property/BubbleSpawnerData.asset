@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399c6847b118a4a25ad4e4879358053a, type: 3}
+  m_Name: BubbleSpawnerData
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 4618447527710482737, guid: e98bd66a7b761844799e05504f49496f, type: 3}
+  bubbleSpeed: 0.3
+  horizontalDrift: 0.1
+  bouncebackDistance: 0.1
+  pushHorizontalSpeed: 3
+  pushVerticalSpeed: 3
+  maxHorizontalDistance: 4
+  destroyTime: 20
+  popClips:
+  - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
+  - {fileID: 8300000, guid: c60e6f5e688510e4a84a7cb1c83cd8ef, type: 3}

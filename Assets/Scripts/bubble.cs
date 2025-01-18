@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 /// <summary>
@@ -11,32 +12,8 @@ using UnityEngine;
 /// </summary>
 public class BubbleSpawner : MonoBehaviour
 {
-    [Header("Bubble Prefab")]
-    [Tooltip("Drag and drop your bubble prefab here.")]
-    public GameObject bubblePrefab;
-
-    [Header("Spawn Settings")]
-    // [Tooltip("Horizontal range around the spawner's X-position where bubbles can appear.")]
-    // public float spawnRange = 5f;
-
-    [Header("Movement Settings")]
-    [Tooltip("Upward speed for bubbles.")]
-    public float bubbleSpeed = 0.1f;
-    [Tooltip("The range of horizontal drifting speed.")]
-    public float horizontalDrift = 0.3f;
-    [Tooltip("The distance to move opposite direction")]
-    public float bouncebackDistance = 1f;
-    [Tooltip("Push horizontal speed")]
-    public float pushHorizontalSpeed = 4f;
-    [Tooltip("Push vertical speed")]
-    public float pushVerticalSpeed = 2f;
-    [Tooltip("Max horizontal distance")]
-    public float maxHorizontalDistance = 5f;
-    [Tooltip("Time to destroy the bubble")]
-    public float destroyTime = 10f;
-    [Tooltip("泡泡破裂音效组")]
-    public List<AudioClip> popClips;
-    private GameObject _bubble;
+    public BubbleSpawnerData data;
+    private GameObject[] _bubbles = new GameObject[2];
 
     public GameObject SpawnBubble()
     {
@@ -48,19 +25,19 @@ public class BubbleSpawner : MonoBehaviour
                                        transform.position.z);
 
         // Instantiate the bubble
-        GameObject newBubble = Instantiate(bubblePrefab, spawnPos, Quaternion.identity);
+        GameObject newBubble = Instantiate(data.bubblePrefab, spawnPos, Quaternion.identity);
 
         // Add the BubbleBehaviour script to control the bubble's movement
         BubbleBehaviour bubbleBehavior = newBubble.AddComponent<BubbleBehaviour>();
-        bubbleBehavior.verticalSpeed = bubbleSpeed;
-        bubbleBehavior.horizontalDrift = horizontalDrift;
-        bubbleBehavior.bouncebackDistance = bouncebackDistance;
+        bubbleBehavior.verticalSpeed = data.bubbleSpeed;
+        bubbleBehavior.horizontalDrift = data.horizontalDrift;
+        bubbleBehavior.bouncebackDistance = data.bouncebackDistance;
         bubbleBehavior.initialDir = xOffset > 0 ? 1 : -1;
-        bubbleBehavior.pushHorizontalSpeed = pushHorizontalSpeed;
-        bubbleBehavior.pushVerticalSpeed = pushVerticalSpeed;
-        bubbleBehavior.maxHorizontalDistance = maxHorizontalDistance;
-        bubbleBehavior.destroyTime = destroyTime;
-        bubbleBehavior.popClips = popClips;
+        bubbleBehavior.pushHorizontalSpeed = data.pushHorizontalSpeed;
+        bubbleBehavior.pushVerticalSpeed = data.pushVerticalSpeed;
+        bubbleBehavior.maxHorizontalDistance = data.maxHorizontalDistance;
+        bubbleBehavior.destroyTime = data.destroyTime;
+        bubbleBehavior.popClips = data.popClips;
         bubbleBehavior.Init();
 
         return newBubble;
@@ -68,14 +45,35 @@ public class BubbleSpawner : MonoBehaviour
 
     public void checkExplode()
     {
-        if (_bubble == null) return;
-        Debug.Log("Check Explode");
-        _bubble.GetComponent<BubbleBehaviour>().checkExplode();
+        for (int i = 0; i < _bubbles.Length; i++)
+        {
+            if (_bubbles[i] == null) continue;
+            _bubbles[i].GetComponent<BubbleBehaviour>().checkExplode();
+        }
     }
 
     public void onBubble(GameObject bubble)
     {
-        _bubble = bubble;
+        for (int i = 0; i < _bubbles.Length; i++)
+        {
+            if (_bubbles[i] == null)
+            {
+                _bubbles[i] = bubble;
+                break;
+            }
+        }
+    }
+
+    public void offBubble(GameObject bubble)
+    {
+        for (int i = 0; i < _bubbles.Length; i++)
+        {
+            if (_bubbles[i] == bubble)
+            {
+                _bubbles[i] = null;
+                break;
+            }
+        }
     }
 
 }
@@ -158,18 +156,29 @@ public class BubbleBehaviour : MonoBehaviour
                 if (_horizontalDistance > maxHorizontalDistance)
                 {
                     _horizontalDistance = maxHorizontalDistance;
+                    _hasBeenPushed = false;
                 }
 
-                float percent = _horizontalDistance / maxHorizontalDistance;
-                float speed = pushHorizontalSpeed * (1 - percent);
-                Vector3 movement = new Vector3(
-                    _pushDirection.x * speed * Time.deltaTime,
-                    _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
-                    0f
-                );
+                if (_hasBeenPushed)
+                {
+                    // faster at the beginning
+                    float percent = _horizontalDistance / maxHorizontalDistance;
+                    // if (percent > 0.95) percent = 1; and snap to max distance
+                    float speed = pushHorizontalSpeed * (1 - percent * percent * percent * percent);
+                    Vector3 movement = new Vector3(
+                        _pushDirection.x * speed * Time.deltaTime,
+                        _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
+                        0f
+                    );
 
-                transform.Translate(movement);
-                _horizontalDistance += Mathf.Abs(movement.x);
+                    if (_horizontalDistance + Mathf.Abs(movement.x) > maxHorizontalDistance)
+                    {
+                        movement.x = maxHorizontalDistance - _horizontalDistance;
+                    }
+
+                    transform.Translate(movement);
+                    _horizontalDistance += Mathf.Abs(movement.x);
+                }
 
                 // If you still want the bubble to be destroyed off-screen:
             }
@@ -194,6 +203,12 @@ public class BubbleBehaviour : MonoBehaviour
                 {
                     _driftDirection *= -1;
                     _distance = 0;
+                }
+
+                float percent = _horizontalDistance / maxHorizontalDistance;
+                if (percent < 1 && _hasBeenPushed)
+                {
+                    movement.x = 0;
                 }
 
                 // Apply the movement
@@ -234,8 +249,6 @@ public class BubbleBehaviour : MonoBehaviour
             // Make the player a child of the bubble
             // collision.transform.SetParent(transform, true);
             _shouldMove = false;    // Stop the bubble from moving
-            _shouldPop = true;
-
             collision.gameObject.GetComponent<BubbleSpawner>().onBubble(gameObject);
         }
     }
@@ -250,6 +263,7 @@ public class BubbleBehaviour : MonoBehaviour
             // Reset the player's parent to null
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
+            collision.gameObject.GetComponent<BubbleSpawner>().offBubble(gameObject);
         }
     }
 
@@ -319,15 +333,13 @@ public class BubbleBehaviour : MonoBehaviour
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
         _horizontalDistance = 0;
+        Debug.Log(gameObject.transform.position);
     }
 
     public void checkExplode()
     {
         if (destroyed) return;
-        if (_shouldPop)
-        {
-            destroyBubble();
-        }
+        destroyBubble();
     }
 
 
