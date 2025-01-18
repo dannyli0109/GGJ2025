@@ -25,11 +25,5 @@ namespace HFSM
 			movementController.Jump();
 			base.OnEnter();
 		}
-
-		public override void OnLogic()
-		{
-			movementController.UpdateToward();
-			base.OnLogic();
-		}
 	}
 }

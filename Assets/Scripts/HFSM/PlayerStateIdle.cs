@@ -27,14 +27,5 @@ namespace HFSM
 			movementController.ResetJumpCount();
 			base.OnEnter();
 		}
-
-		public override void OnLogic()
-		{
-			if(input.Down && input.HasBuffer("Jump"))
-			{
-				movementController.CrossDownPlatform();
-			}
-			base.OnLogic();
-		}
 	}
 }
