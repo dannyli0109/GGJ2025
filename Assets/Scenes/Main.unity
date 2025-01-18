@@ -218,6 +218,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: bubbleSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: horizontalDrift
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: pushVerticalSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: bouncebackDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: pushHorizontalSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: maxHorizontalDistance
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2086064545993363811, guid: bdad20334991807468e12753efdcdd53, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

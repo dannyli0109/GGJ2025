@@ -29,6 +29,8 @@ public class BubbleSpawner : MonoBehaviour
     public float pushVerticalSpeed = 2f;
     [Tooltip("Max horizontal distance")]
     public float maxHorizontalDistance = 5f;
+    [Tooltip("Time to destroy the bubble")]
+    public float destroyTime = 10f;
 
     PlayerInput input;
     private GameObject _bubble;
@@ -72,6 +74,7 @@ public class BubbleSpawner : MonoBehaviour
         bubbleBehavior.pushHorizontalSpeed = pushHorizontalSpeed;
         bubbleBehavior.pushVerticalSpeed = pushVerticalSpeed;
         bubbleBehavior.maxHorizontalDistance = maxHorizontalDistance;
+        bubbleBehavior.destroyTime = destroyTime;
         bubbleBehavior.Init();
 
 
@@ -94,6 +97,7 @@ public class BubbleBehaviour : MonoBehaviour
     public float pushHorizontalSpeed = 4f;
     public float pushVerticalSpeed = 2f;
     public float maxHorizontalDistance = 5f;
+    public float destroyTime = 10f;
 
 
     private float _driftDirection;
@@ -124,6 +128,7 @@ public class BubbleBehaviour : MonoBehaviour
     {
         _isInit = true;
         _driftDirection = initialDir;
+        Invoke("destroyBubble", destroyTime);
     }
 
     private void Update()
