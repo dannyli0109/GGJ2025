@@ -76,6 +76,7 @@ public class BubbleBehaviour : MonoBehaviour
     private float _distance = 0;
     private bool _isInit = false;
     private bool _shouldMove = true;
+    float pushPower = 50;
 
     private void Start()
     {
@@ -153,6 +154,53 @@ public class BubbleBehaviour : MonoBehaviour
             _shouldMove = true;    // Allow the bubble to move again
         }
     }
+
+    /// <summary>
+    /// A trigger-based push: if the player is inside this bubble's trigger from below or the side,
+    /// the bubble moves away from the player.
+    /// </summary>
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        // Only respond to the player
+        if (!other.CompareTag("Player")) return;
+
+        // If the bubble isn't moving for some reason (player is standing on top), skip
+        // unless you specifically want a push even when riding. Adjust to your liking:
+        if (!_shouldMove) return;
+
+        // Calculate direction from the player to the bubble
+        Vector2 direction = (transform.position - other.transform.position);
+
+        // If player is mostly below the bubble (direction.y > x), push bubble up
+        // If from the side, push bubble horizontally away from the player
+        float absX = Mathf.Abs(direction.x);
+        float absY = Mathf.Abs(direction.y);
+
+        if (absY > absX)
+        {
+            // We only push up if the bubble is above the player => direction.y > 0
+            // (meaning the player is below). Adjust as needed if you want symmetrical logic.
+            if (direction.y > 0f)
+            {
+                transform.Translate(Vector2.up * pushPower * Time.deltaTime, Space.World);
+            }
+        }
+        else
+        {
+            // Pushing from the left or right
+            if (direction.x > 0f)
+            {
+                // Bubble is to the right => player is on the left => push bubble further right
+                transform.Translate(Vector2.right * pushPower * Time.deltaTime, Space.World);
+            }
+            else
+            {
+                // Bubble is to the left => player is on the right => push bubble further left
+                transform.Translate(Vector2.left * pushPower * Time.deltaTime, Space.World);
+            }
+        }
+    }
+
 
     /// <summary>
     /// Detach the player (or any children) before the bubble is destroyed.
