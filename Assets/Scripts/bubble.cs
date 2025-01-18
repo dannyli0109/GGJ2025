@@ -223,7 +223,7 @@ public class BubbleBehaviour : MonoBehaviour
             Debug.Log(collision.contacts[0].normal);
             if (collision.contacts[0].normal.y > 0) return;
             // Make the player a child of the bubble
-            collision.transform.SetParent(transform, true);
+            // collision.transform.SetParent(transform, true);
             _shouldMove = false;    // Stop the bubble from moving
         }
     }
@@ -236,7 +236,7 @@ public class BubbleBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Reset the player's parent to null
-            collision.transform.SetParent(null, true);
+            // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
         }
     }
@@ -256,7 +256,6 @@ public class BubbleBehaviour : MonoBehaviour
 
 
         // If the bubble is already pushed, don't re-push it
-        if (_hasBeenPushed) return;
 
         // Vector from player's position to bubble's position
         Vector2 bubblePos = transform.position;
@@ -319,13 +318,13 @@ public class BubbleBehaviour : MonoBehaviour
     {
         // For safety, ensure no child remains parented
         // (especially the player, if still attached).
-        for (int i = transform.childCount - 1; i >= 0; i--)
-        {
-            Transform child = transform.GetChild(i);
+        // for (int i = transform.childCount - 1; i >= 0; i--)
+        // {
+        //     Transform child = transform.GetChild(i);
 
-            // If you're specifically looking for "Player", do:
-            if (child.CompareTag("Player"))
-                child.SetParent(null, true);
-        }
+        //     // If you're specifically looking for "Player", do:
+        //     if (child.CompareTag("Player"))
+        //         child.SetParent(null, true);
+        // }
     }
 }
