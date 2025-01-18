@@ -34,7 +34,7 @@ public class MovementController : MonoBehaviour
 	BoxCollider2D col;
 	Rigidbody2D rig;
 	Camera mainCamera;
-	//[HideInInspector] public GroundDetector groundDetector;
+	[HideInInspector] public GroundDetector groundDetector;
 
 	#region System Function
 	private void Awake()
@@ -42,10 +42,9 @@ public class MovementController : MonoBehaviour
 		input = GetComponent<PlayerInput>();
 		col = GetComponent<BoxCollider2D>();
 		rig = GetComponent<Rigidbody2D>();
-		//groundDetector = GetComponentInChildren<GroundDetector>();
+		groundDetector = GetComponentInChildren<GroundDetector>();
 		mainCamera = Camera.main;
 		landJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.landJumpHeight);
-		//airJumpSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics2D.gravity.y) * rig.gravityScale * movementData.airJumpHeight);
 		ResetJumpCount();
 		RecordSpawnPos();
 	}

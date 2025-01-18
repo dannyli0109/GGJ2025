@@ -4911,9 +4911,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0017035775
-    width: 2.0842912
-    height: 0.8994889
+    y: 0.003407155
+    width: 1
+    height: 0.9914821
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
@@ -4943,7 +4943,7 @@ Transform:
   m_GameObject: {fileID: 1728788499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0843248, y: 0.50898504, z: -10}
+  m_LocalPosition: {x: -4.1850734, y: 0.5086522, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5306,7 +5306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9060484295776468580, guid: 28080dee52c782840b0f8de3d2938bde, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9060484295776468580, guid: 28080dee52c782840b0f8de3d2938bde, type: 3}
       propertyPath: m_LocalPosition.z

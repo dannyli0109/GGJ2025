@@ -508,9 +508,9 @@ MonoBehaviour:
   bubbleSpeed: 0.15
   horizontalDrift: 0.25
   bouncebackDistance: 0.25
-  pushHorizontalSpeed: 2
+  pushHorizontalSpeed: 2.6
   pushVerticalSpeed: 1
-  maxHorizontalDistance: 2.5
+  maxHorizontalDistance: 5
   destroyTime: 10
   popClips:
   - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
@@ -576,7 +576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &316117667587247156
 Transform:
   m_ObjectHideFlags: 0
