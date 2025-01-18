@@ -150,6 +150,7 @@ public class BubbleBehaviour : MonoBehaviour
         if (gameObject.IsDestroyed()) return;
         if (!_isInit) return;
         if (destroyed) return;
+        if (!_shouldMove) return;
         if (_hasBeenPushed)
         {
             // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
@@ -307,7 +308,7 @@ public class BubbleBehaviour : MonoBehaviour
         // Record that we got pushed in this final direction
         _pushDirection = finalDir;
         _hasBeenPushed = true;
-        _shouldMove = false;  // (Optional) Stop the drift if you want
+        _shouldMove = true;  // (Optional) Stop the drift if you want
     }
 
 
