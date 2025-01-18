@@ -56,7 +56,7 @@ public class BubbleSpawner : MonoBehaviour
     private GameObject SpawnBubble()
     {
         // offset by gameobject's facing direction
-        float xOffset = transform.localScale.x * 1.5f;
+        float xOffset = transform.localScale.x * 2f;
 
         Vector3 spawnPos = new Vector3(transform.position.x + xOffset,
                                        transform.position.y + 0.2f,
