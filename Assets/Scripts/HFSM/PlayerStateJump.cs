@@ -4,38 +4,42 @@ using UnityHFSM;
 
 namespace HFSM
 {
-	public class PlayerStateJump : PlayerState
-	{
-		public PlayerStateJump(
-			MonoBehaviour mono,
-			PlayerInput input,
-			Animator animator = null,
-			Action<AnimState<string, string>> onEnter = null,
-			Action<AnimState<string, string>> onLogic = null,
-			Action<AnimState<string, string>> onPhysics = null,
-			Action<AnimState<string, string>> onExit = null,
-			Func<AnimState<string, string>, bool> canExit = null,
-			bool needsExitTime = false,
-			bool isGhostState = false) : base(mono, input, animator, onEnter, onLogic, onPhysics, onExit, canExit, needsExitTime, isGhostState)
-		{
-		}
+    public class PlayerStateJump : PlayerState
+    {
+        public PlayerStateJump(
+            MonoBehaviour mono,
+            PlayerInput input,
+            Animator animator = null,
+            Action<AnimState<string, string>> onEnter = null,
+            Action<AnimState<string, string>> onLogic = null,
+            Action<AnimState<string, string>> onPhysics = null,
+            Action<AnimState<string, string>> onExit = null,
+            Func<AnimState<string, string>, bool> canExit = null,
+            bool needsExitTime = false,
+            bool isGhostState = false) : base(mono, input, animator, onEnter, onLogic, onPhysics, onExit, canExit, needsExitTime, isGhostState)
+        {
+        }
 
-		public override void OnEnter()
-		{
-			input.UseBuffer("Jump");
-			movementController.Jump();
-			movementController.JumpCount--;
-			var groundCollider = movementController.groundDetector.Detect();
-			if (groundCollider != null && groundCollider.CompareTag("Ground"))
-			{
-				movementController.RecordSpawnPos();
-			}
-			if (mono.gameObject.GetComponent<BubbleSpawner>())
-			{
-				Debug.Log("BubbleSpawner");
-				mono.gameObject.GetComponent<BubbleSpawner>().checkExplode();
-			}
-			base.OnEnter();
-		}
-	}
+        public override void OnEnter()
+        {
+            input.UseBuffer("Jump");
+            movementController.Jump();
+            movementController.JumpCount--;
+            Debug.Log("Jump");
+            Debug.Log("mono: " + mono.gameObject.name);
+            if (mono.gameObject.GetComponent<BubbleSpawner>())
+            {
+                mono.gameObject.GetComponent<BubbleSpawner>().checkExplode();
+            }
+
+            if (mono.gameObject.GetComponent<PlayerFSM>())
+            {
+                AudioSource audioSource = mono.gameObject.GetComponent<AudioSource>();
+                audioSource.clip = mono.gameObject.GetComponent<PlayerFSM>().jumpSound;
+                audioSource.volume = 0.3f;
+                audioSource.Play();
+            }
+            base.OnEnter();
+        }
+    }
 }

@@ -24,4 +24,6 @@ public class BubbleSpawnerData : ScriptableObject
     public float destroyTime = 10f;
     [Tooltip("泡泡破裂音效组")]
     public List<AudioClip> popClips;
+    [Tooltip("blow bubble sound")]
+    public List<AudioClip> blowClips;
 }
