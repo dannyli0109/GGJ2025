@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 6266414498908107409}
   - component: {fileID: 6317074865756242613}
   - component: {fileID: 859462055300132319}
-  - component: {fileID: 3867591505312670605}
+  - component: {fileID: 5294285831015685688}
   m_Layer: 3
   m_Name: CutePlayer
   m_TagString: Player
@@ -371,6 +371,7 @@ MonoBehaviour:
     minNormalAngle: 80
     maxNormalAngle: 100
   sprintEnable: 1
+  spawnPos: {x: 0, y: 0, z: 0}
   inCoyoteTime: 0
 --- !u!114 &6266414498908107409
 MonoBehaviour:
@@ -423,8 +424,12 @@ MonoBehaviour:
   pushHorizontalSpeed: 4
   pushVerticalSpeed: 2
   maxHorizontalDistance: 5
---- !u!60 &3867591505312670605
-PolygonCollider2D:
+  destroyTime: 10
+  popClips:
+  - {fileID: 8300000, guid: 91a91e5cf94a09347814808384e312c5, type: 3}
+  - {fileID: 8300000, guid: c60e6f5e688510e4a84a7cb1c83cd8ef, type: 3}
+--- !u!61 &5294285831015685688
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -455,7 +460,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -465,21 +470,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.8252468, y: 0.6602826}
-      - {x: 0.45165062, y: 0.9399462}
-      - {x: 0.057088852, y: 0.9962969}
-      - {x: -0.4691143, y: 0.9172149}
-      - {x: -0.757143, y: 0.6883035}
-      - {x: -0.9676123, y: 0.30349806}
-      - {x: -0.9138241, y: -0.161551}
-      - {x: -0.50500053, y: -0.3674978}
-      - {x: 0.07011032, y: -0.37046862}
-      - {x: 0.62089884, y: -0.22952294}
-      - {x: 0.9396496, y: 0.08112383}
-      - {x: 0.9510565, y: 0.30901712}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5}
+  m_EdgeRadius: 0
 --- !u!1 &7993722651469698273
 GameObject:
   m_ObjectHideFlags: 0
