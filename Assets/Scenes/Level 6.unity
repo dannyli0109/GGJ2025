@@ -364,6 +364,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8154730239013680100, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b1dd1d24daf6ab40ab38560bef5f44f, type: 3}
+    - target: {fileID: 8154730239013680100, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Color.b
+      value: 0.15150581
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154730239013680100, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Color.g
+      value: 0.16441466
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154730239013680100, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6528301
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2262,7 +2278,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 0.9858321, b: 0.4660377, a: 1}
+  m_Color: {r: 0.82641506, g: 0.5781493, b: 0.10447132, a: 1}
   m_Origin: {x: -20, y: -11, z: 0}
   m_Size: {x: 41, y: 24, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
