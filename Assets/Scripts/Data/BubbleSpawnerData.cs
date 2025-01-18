@@ -26,4 +26,6 @@ public class BubbleSpawnerData : ScriptableObject
     public List<AudioClip> popClips;
     [Tooltip("blow bubble sound")]
     public List<AudioClip> blowClips;
+    [Tooltip("bounce")]
+    public List<AudioClip> bounceClips;
 }

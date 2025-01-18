@@ -25,3 +25,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c60e6f5e688510e4a84a7cb1c83cd8ef, type: 3}
   blowClips:
   - {fileID: 8300000, guid: 6966c8a2b89424c48899bad6422359b9, type: 3}
+  bounceClips:
+  - {fileID: 8300000, guid: dd5aef211a2234f98a00306e6a8ca546, type: 3}
