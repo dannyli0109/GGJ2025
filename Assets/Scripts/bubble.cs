@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using HFSM;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
@@ -91,6 +92,7 @@ public class BubbleBehaviour : MonoBehaviour
     private float _distance = 0;
     private bool _isInit = false;
     private bool _shouldMove = true;
+    private float _horizontalDistance = 0;
     float pushPower = 50;
     bool destroyed = false;
     AudioSource audioSource;
@@ -134,47 +136,54 @@ public class BubbleBehaviour : MonoBehaviour
         if (gameObject.IsDestroyed()) return;
         if (!_isInit) return;
         if (destroyed) return;
-        if (!_shouldMove) return;
-        if (_hasBeenPushed)
+        // if (!_shouldMove) return;
         {
-            // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
-            // slow down horizontal speed as it approaches max distance
-            float speed = pushHorizontalSpeed * (1 - Mathf.Abs(_distance / maxHorizontalDistance));
-            Vector3 movement = new Vector3(
-                _pushDirection.x * speed * Time.deltaTime,
-                _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
-                0f
-            );
-            transform.Translate(movement);
-            _distance += movement.x;
+            if (_hasBeenPushed)
+            {
+                // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
+                // slow down horizontal speed as it approaches max distance
+                if (_horizontalDistance > maxHorizontalDistance)
+                {
+                    _horizontalDistance = maxHorizontalDistance;
+                }
+                float speed = pushHorizontalSpeed * (1 - Mathf.Abs(_horizontalDistance / maxHorizontalDistance));
+                Vector3 movement = new Vector3(
+                    _pushDirection.x * speed * Time.deltaTime,
+                    _pushDirection.y * pushVerticalSpeed * Time.deltaTime,
+                    0f
+                );
 
-            // If you still want the bubble to be destroyed off-screen:
-            CheckAndDestroyOffScreen();
-            return;
+                transform.Translate(movement);
+                _horizontalDistance += movement.x;
+
+                // If you still want the bubble to be destroyed off-screen:
+            }
         }
 
         // -----------------------------------------------------------
         // Existing drifting logic (only used if NOT pushed yet)
         // -----------------------------------------------------------
-        if (_shouldMove)
         {
-            // Move the bubble upward + drift
-            Vector3 movement = new Vector3(
-                _driftDirection * horizontalDrift * Time.deltaTime,
-                verticalSpeed * Time.deltaTime,
-                0f
-            );
-
-            // Track horizontal distance for bounceback
-            _distance += movement.x;
-            if (Mathf.Abs(_distance) > bouncebackDistance)
+            if (_shouldMove)
             {
-                _driftDirection *= -1;
-                _distance = 0;
-            }
+                // Move the bubble upward + drift
+                Vector3 movement = new Vector3(
+                    _driftDirection * horizontalDrift * Time.deltaTime,
+                    verticalSpeed * Time.deltaTime,
+                    0f
+                );
 
-            // Apply the movement
-            transform.Translate(movement);
+                // Track horizontal distance for bounceback
+                _distance += movement.x;
+                if (Mathf.Abs(_distance) > bouncebackDistance)
+                {
+                    _driftDirection *= -1;
+                    _distance = 0;
+                }
+
+                // Apply the movement
+                transform.Translate(movement);
+            }
         }
 
         // Continue checking if the bubble goes off-screen
@@ -221,9 +230,12 @@ public class BubbleBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
             // Reset the player's parent to null
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
+
+
         }
     }
 
@@ -278,9 +290,7 @@ public class BubbleBehaviour : MonoBehaviour
             else if (absAngle < 67.5f)
             {
                 // If angle > 0 => direction is "left" from the bubble's perspective, so push up-left
-                finalDir = (angle > 0)
-                    ? new Vector2(-1f, 1f).normalized
-                    : new Vector2(1f, 1f).normalized;
+                finalDir = Vector2.up;
             }
             else
             {
@@ -294,7 +304,7 @@ public class BubbleBehaviour : MonoBehaviour
         _pushDirection = finalDir;
         _hasBeenPushed = true;
         _shouldMove = true;  // (Optional) Stop the drift if you want
-        _distance = 0;
+        _horizontalDistance = 0;
     }
 
 

@@ -218,6 +218,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: bubbleSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: pushVerticalSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: pushHorizontalSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: bdad20334991807468e12753efdcdd53, type: 3}
+      propertyPath: maxHorizontalDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2086064545993363811, guid: bdad20334991807468e12753efdcdd53, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -401,6 +417,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 859462055300132319, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: bubbleSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: horizontalDrift
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: pushVerticalSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: bouncebackDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: pushHorizontalSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 859462055300132319, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
+      propertyPath: maxHorizontalDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1741813853633781084, guid: 443e5f6d1b3ac914ca0102c61ce47d64, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4324,10 +4364,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.0013623978
     y: 0
-    width: 1
-    height: 1
+    width: 1.5122615
+    height: 3.0222223
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60

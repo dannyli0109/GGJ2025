@@ -4,6 +4,7 @@ public class BubbleDownOnStand : MonoBehaviour
 {
     private Rigidbody2D _rb;
     public float gravityScale = 0.2f;
+    private bool isStandOn = false;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class BubbleDownOnStand : MonoBehaviour
             // down force
             _rb.bodyType = RigidbodyType2D.Dynamic;
             _rb.gravityScale = gravityScale;
+            isStandOn = true;
         }
     }
 
@@ -31,6 +33,19 @@ public class BubbleDownOnStand : MonoBehaviour
             // up force
             _rb.bodyType = RigidbodyType2D.Kinematic;
             _rb.gravityScale = 0;
+            isStandOn = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (isStandOn)
+        {
+            _rb.velocity = new Vector2(0, -gravityScale);
+        }
+        else
+        {
+            _rb.velocity = Vector2.zero;
         }
     }
 }
