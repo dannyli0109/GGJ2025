@@ -134,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5109472, y: 0.13551235}
+  m_Size: {x: 0.45, y: 0.13551235}
   m_EdgeRadius: 0
 --- !u!58 &4339762417461106884
 CircleCollider2D:
@@ -186,7 +186,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 120
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
