@@ -71,7 +71,7 @@ namespace UnityHFSM
 
 			if (animator.HasState(0, animHash))
 			{
-				animator.CrossFade(animHash, 0);
+				animator.CrossFade(animHash, 0.2f);
 			}
 
 			onEnter?.Invoke(this);
