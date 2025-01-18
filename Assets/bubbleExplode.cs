@@ -21,6 +21,7 @@ public class bubbleExplode : MonoBehaviour
         // Play sound
         // Play particle effect
         // Destroy bubble
+        Debug.Log("Bubble popped!");
         Destroy(this.transform.parent.gameObject);
     }
 }

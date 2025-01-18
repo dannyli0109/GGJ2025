@@ -114,6 +114,7 @@ public class BubbleBehaviour : MonoBehaviour
 
     void destroyBubble()
     {
+        if (destroyed) return;
         destroyed = true;
         GameObject bubble = gameObject.transform.GetChild(0).gameObject;
         bubble.GetComponent<Animator>().Play("broken");
