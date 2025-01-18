@@ -51,7 +51,7 @@ public class BubbleSpawner : MonoBehaviour
         float xOffset = transform.localScale.x * 1.5f;
 
         Vector3 spawnPos = new Vector3(transform.position.x + xOffset,
-                                       transform.position.y,
+                                       transform.position.y + 0.2f,
                                        transform.position.z);
 
         // Instantiate the bubble
@@ -95,13 +95,22 @@ public class BubbleBehaviour : MonoBehaviour
     private bool _isInit = false;
     private bool _shouldMove = true;
     float pushPower = 50;
-
+    bool destroyed = false;
 
     private void Start()
     {
         // Randomize the direction of the horizontal drift
         // _driftDirection = 1;
         // Destroy the bubble after a set time
+        // GameObject bubble = gameObject.transform.GetChild(0).gameObject;
+        // bubble.GetComponent<Animator>().Play("broken");
+    }
+
+    void destroyBubble()
+    {
+        destroyed = true;
+        GameObject bubble = gameObject.transform.GetChild(0).gameObject;
+        bubble.GetComponent<Animator>().Play("broken");
     }
 
     public void Init()
@@ -115,6 +124,7 @@ public class BubbleBehaviour : MonoBehaviour
         // if gameobject is destroyed
         if (gameObject.IsDestroyed()) return;
         if (!_isInit) return;
+        if (destroyed) return;
         if (_hasBeenPushed)
         {
             // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
@@ -171,7 +181,7 @@ public class BubbleBehaviour : MonoBehaviour
 
         if (transform.position.y > screenY + bubbleHeight / 2)
         {
-            Destroy(gameObject);
+            destroyBubble();
         }
     }
 
@@ -209,9 +219,9 @@ public class BubbleBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Triggered" + other.tag);
-        if (!other.CompareTag("Player"))
+        if (other.CompareTag("Ground") && !other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            destroyBubble();
         }
     }
 
@@ -289,11 +299,8 @@ public class BubbleBehaviour : MonoBehaviour
             Transform child = transform.GetChild(i);
 
             // If you're specifically looking for "Player", do:
-            // if (child.CompareTag("Player"))
-            //     child.SetParent(null, true);
-
-            // Or simply detach all children, if you want:
-            child.SetParent(null, true);
+            if (child.CompareTag("Player"))
+                child.SetParent(null, true);
         }
     }
 }
