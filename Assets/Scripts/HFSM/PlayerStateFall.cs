@@ -23,6 +23,7 @@ namespace HFSM
 		public override void OnPhysics()
 		{
 			base.OnPhysics();
+			movementController.SetFallGravityScale();
 			movementController.LimitFallSpeed();
 		}
 	}

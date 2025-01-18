@@ -79,6 +79,16 @@ public class MovementController : MonoBehaviour
 		}
 	}
 
+	public void SetFallGravityScale()
+	{
+		rig.gravityScale = movementData.fallGravityScale;
+	}
+
+	public void ResetGravityScale()
+	{
+		rig.gravityScale = 1;
+	}
+
 	public void LimitFallSpeed()
 	{
 		if (rig.velocity.y < -movementData.maxFallSpeed)

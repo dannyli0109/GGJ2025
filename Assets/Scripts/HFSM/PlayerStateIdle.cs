@@ -25,6 +25,7 @@ namespace HFSM
 		public override void OnEnter()
 		{
 			movementController.ResetJumpCount();
+			movementController.ResetGravityScale();
 			base.OnEnter();
 		}
 	}
