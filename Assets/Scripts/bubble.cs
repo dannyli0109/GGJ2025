@@ -195,7 +195,7 @@ public class BubbleBehaviour : MonoBehaviour
                 }
 
                 float percent = _horizontalDistance / maxHorizontalDistance;
-                if (percent < 0.95 && _hasBeenPushed)
+                if (percent < 1 && _hasBeenPushed)
                 {
                     movement.x = 0;
                 }
