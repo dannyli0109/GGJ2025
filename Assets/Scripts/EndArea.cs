@@ -26,7 +26,7 @@ public class Destination : MonoBehaviour
                 GetComponent<AudioSource>().Play();
                 GetComponent<BoxCollider2D>().enabled = false;
                 flagAnimator.SetTrigger("rise");
-                StartCoroutine(DelayFunc(LevelComplete, 2));
+                StartCoroutine(DelayFunc(LevelComplete, 1));
             }
         }
     }

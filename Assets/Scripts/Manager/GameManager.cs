@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,10 +21,10 @@ public class GameManager : SingletonMono<GameManager>
         SwitchBgm(0);
     }
 
-    public void _SwitchNextScene()
+    public IEnumerator _SwitchNextScene()
     {
         int id = SceneManager.GetActiveScene().buildIndex;
-        SwitchScene(id + 1);
+        yield return StartCoroutine(_SwitchScene(id + 1));
     }
 
     public void SwitchNextScene()
@@ -31,9 +32,9 @@ public class GameManager : SingletonMono<GameManager>
         CircleTransition.Instance.TransitionToNext();
     }
 
-    public void _SwitchScene(int id)
+    public IEnumerator _SwitchScene(int id)
     {
-        SceneManager.LoadScene(id);
+        yield return SceneManager.LoadSceneAsync(id);
         SwitchBgm(id);
     }
 
