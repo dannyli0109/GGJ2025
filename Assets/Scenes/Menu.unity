@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleImagePrefab: {fileID: 8477594705893767511, guid: 9a0ff8906fc924640abaf09565cf7679, type: 3}
-  maxScale: 20
+  maxScale: 40
   transitionDuration: 1
 --- !u!114 &457005605
 MonoBehaviour:
