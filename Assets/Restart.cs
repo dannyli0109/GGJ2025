@@ -25,7 +25,6 @@ public class Restart : MonoBehaviour
 
     public static void Back()
     {
-		GameManager.Instance.SwitchScene(0);
+        GameManager.Instance.SwitchScene(0);
     }
-
 }

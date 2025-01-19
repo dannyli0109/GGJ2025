@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityHFSM;
 
@@ -142,6 +143,16 @@ namespace HFSM
         void OnTransitionPlatformToFall(TransitionAfter<string> t)
         {
             movementController.JumpCount--;
+        }
+
+        public void onDeath()
+        {
+            var children = GetComponentsInChildren<SpriteRenderer>();
+            foreach (var child in children)
+            {
+                child.color = new Color(child.color.r, child.color.g, child.color.b, 0);
+                child.DOFade(1, 1f);
+            }
         }
     }
 }
