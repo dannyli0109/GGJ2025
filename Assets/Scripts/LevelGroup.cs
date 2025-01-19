@@ -18,7 +18,7 @@ public class LevelGroup : MonoBehaviour
 			Debug.Log(i);
 			var obj = Instantiate(levelBtnPrefab, transform);
 			//obj.GetComponentInChildren<Text>().text = i.ToString();
-			obj.GetComponent<Image>().sprite = levelSprites[i-1];
+			obj.GetComponent<Image>().sprite = levelSprites[(i - 1) % levelSprites.Length];
 			var btn = obj.GetComponent<Button>();
 			int index = i;
 			btn.onClick.AddListener(() => { GameManager.Instance.SwitchScene(index); });
