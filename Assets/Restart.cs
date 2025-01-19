@@ -22,4 +22,10 @@ public class Restart : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public static void Back()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 }
