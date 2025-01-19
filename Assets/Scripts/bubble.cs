@@ -112,6 +112,7 @@ public class BubbleBehaviour : MonoBehaviour
     bool destroyed = false;
     AudioSource audioSource;
     bool _shouldPop = false;
+    List<GameObject> players = new List<GameObject>();
 
     private void Start()
     {
@@ -167,7 +168,7 @@ public class BubbleBehaviour : MonoBehaviour
         if (destroyed) return;
         if (!_shouldMove) return;
         {
-            if (_hasBeenPushed)
+            if (_hasBeenPushed && players.Count == 0)
             {
                 // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
                 // slow down horizontal speed as it approaches max distance
@@ -269,6 +270,7 @@ public class BubbleBehaviour : MonoBehaviour
             // collision.transform.SetParent(transform, true);
             _shouldMove = false;    // Stop the bubble from moving
             collision.gameObject.GetComponent<BubbleSpawner>().onBubble(gameObject);
+            players.Add(collision.gameObject);
         }
     }
 
@@ -283,6 +285,7 @@ public class BubbleBehaviour : MonoBehaviour
             // collision.transform.SetParent(null, true);
             _shouldMove = true;    // Allow the bubble to move again
             collision.gameObject.GetComponent<BubbleSpawner>().offBubble(gameObject);
+            players.Remove(collision.gameObject);
         }
     }
 
