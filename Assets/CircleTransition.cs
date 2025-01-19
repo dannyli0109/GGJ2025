@@ -51,6 +51,11 @@ public class CircleTransition : MonoBehaviour
         StartCoroutine(DoCircleTransition(id, shrinkOnNewScene));
     }
 
+    public void RestartScene(bool shrinkOnNewScene = true)
+    {
+        StartCoroutine(DoCircleTransition(SceneManager.GetActiveScene().buildIndex, shrinkOnNewScene));
+    }
+
     private IEnumerator DoCircleTransition(int id, bool shrinkOnNewScene)
     {
         // 1) Expand circle from scale=0 to scale=maxScale
