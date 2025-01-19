@@ -168,7 +168,7 @@ public class BubbleBehaviour : MonoBehaviour
         if (destroyed) return;
         if (!_shouldMove) return;
         {
-            if (_hasBeenPushed && players.Count == 0)
+            if (_hasBeenPushed)
             {
                 // transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
                 // slow down horizontal speed as it approaches max distance
