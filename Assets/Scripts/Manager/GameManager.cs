@@ -14,13 +14,13 @@ public class GameManager : SingletonMono<GameManager>
         base.Awake();
     }
 
-	private void Start()
-	{
-		bgmSource = GetComponent<AudioSource>();
-		SwitchBgm(0);
-	}
+    private void Start()
+    {
+        bgmSource = GetComponent<AudioSource>();
+        SwitchBgm(0);
+    }
 
-	public void SwitchNextScene()
+    public void SwitchNextScene()
     {
         int id = SceneManager.GetActiveScene().buildIndex;
         SwitchScene(id + 1);
@@ -48,7 +48,7 @@ public class GameManager : SingletonMono<GameManager>
         {
             Restart();
         }
-        if(Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
         {
             SwitchScene(0);
         }
@@ -56,6 +56,8 @@ public class GameManager : SingletonMono<GameManager>
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        GameManager.instance.SwitchScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
