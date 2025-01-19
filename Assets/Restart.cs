@@ -20,12 +20,12 @@ public class Restart : MonoBehaviour
 
     public static void Res()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.SwitchScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public static void Back()
     {
-        SceneManager.LoadScene(0);
+		GameManager.Instance.SwitchScene(0);
     }
 
 }

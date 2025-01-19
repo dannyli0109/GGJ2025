@@ -12,11 +12,15 @@ public class GameManager : SingletonMono<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        bgmSource = GetComponent<AudioSource>();
-        SwitchBgm(0);
     }
 
-    public void SwitchNextScene()
+	private void Start()
+	{
+		bgmSource = GetComponent<AudioSource>();
+		SwitchBgm(0);
+	}
+
+	public void SwitchNextScene()
     {
         int id = SceneManager.GetActiveScene().buildIndex;
         SwitchScene(id + 1);
