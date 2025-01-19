@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleImagePrefab: {fileID: 8477594705893767511, guid: 9a0ff8906fc924640abaf09565cf7679, type: 3}
-  maxScale: 20
+  maxScale: 40
   transitionDuration: 1
 --- !u!114 &457005605
 MonoBehaviour:
@@ -773,9 +773,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0016433854
-    width: 1.5301853
-    height: 0.7559573
+    y: 0.0020986358
+    width: 1.1367674
+    height: 0.96537244
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
