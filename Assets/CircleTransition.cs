@@ -98,6 +98,7 @@ public class CircleTransition : MonoBehaviour
             CircleTransition.Instance.circleImage = circleObj.transform.GetChild(0).GetComponent<Image>();
         }
         circleImage = CircleTransition.Instance.circleImage;
+        circleImage.gameObject.SetActive(true);
 
         while (elapsed < duration)
         {
