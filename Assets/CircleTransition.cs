@@ -62,7 +62,7 @@ public class CircleTransition : MonoBehaviour
         yield return StartCoroutine(ScaleCircle(0f, maxScale, transitionDuration));
 
         // 2) Load the new scene
-        GameManager.Instance.SwitchScene(id);
+        GameManager.Instance._SwitchScene(id);
 
         // 3) If desired, shrink circle from scale=maxScale back to 0 in the new scene
         if (shrinkOnNewScene)
@@ -77,7 +77,7 @@ public class CircleTransition : MonoBehaviour
         yield return StartCoroutine(ScaleCircle(0f, maxScale, transitionDuration));
 
         // 2) Load the new scene
-        GameManager.Instance.SwitchNextScene();
+        GameManager.Instance._SwitchNextScene();
 
         // 3) If desired, shrink circle from scale=maxScale back to 0 in the new scene
         if (shrinkOnNewScene)

@@ -20,16 +20,26 @@ public class GameManager : SingletonMono<GameManager>
         SwitchBgm(0);
     }
 
-    public void SwitchNextScene()
+    public void _SwitchNextScene()
     {
         int id = SceneManager.GetActiveScene().buildIndex;
         SwitchScene(id + 1);
     }
 
-    public void SwitchScene(int id)
+    public void SwitchNextScene()
+    {
+        CircleTransition.Instance.TransitionToNext();
+    }
+
+    public void _SwitchScene(int id)
     {
         SceneManager.LoadScene(id);
         SwitchBgm(id);
+    }
+
+    public void SwitchScene(int id)
+    {
+        CircleTransition.Instance.TransitionToScene(id);
     }
 
     public void SwitchBgm(int id)
@@ -54,10 +64,17 @@ public class GameManager : SingletonMono<GameManager>
         }
     }
 
-    public void Restart()
+    public void _Restart()
     {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         GameManager.instance.SwitchScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Restart()
+    {
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        CircleTransition.Instance.RestartScene();
     }
 }

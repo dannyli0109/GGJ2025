@@ -41,8 +41,8 @@ public class Destination : MonoBehaviour
 
     void LevelComplete()
     {
-        // GameManager.Instance.SwitchNextScene();
-        CircleTransition.Instance.TransitionToNext(true);
+        GameManager.Instance.SwitchNextScene();
+        // CircleTransition.Instance.TransitionToNext(true);
     }
 
     IEnumerator DelayFunc(UnityAction action, float t)
