@@ -5413,8 +5413,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2.7336683
-    height: 1.1785715
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
@@ -5862,6 +5862,30 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5767687103659213301, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.76470596
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767687103659213301, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.854902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767687103659213301, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.72156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767687103659213301, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.4156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767687103659213301, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.40000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767687103659213301, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.2392157
+      objectReference: {fileID: 0}
     - target: {fileID: 6850849234776307538, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5941,6 +5965,30 @@ PrefabInstance:
     - target: {fileID: 6850849234776307538, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053691759814865542, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.76470596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053691759814865542, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.854902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053691759814865542, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.72156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053691759814865542, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.4156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053691759814865542, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.40000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053691759814865542, guid: 6c5a90c9a59b0d84e9e393aedd2d85cd, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.2392157
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
