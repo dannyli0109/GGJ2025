@@ -24,7 +24,8 @@ public class GameManager : SingletonMono<GameManager>
     public IEnumerator _SwitchNextScene()
     {
         int id = SceneManager.GetActiveScene().buildIndex;
-        yield return StartCoroutine(_SwitchScene(id + 1));
+        int count = SceneManager.sceneCountInBuildSettings;
+        yield return StartCoroutine(_SwitchScene((id + 1) % count));
     }
 
     public void SwitchNextScene()
