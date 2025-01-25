@@ -1,3 +1,7 @@
+using Cinemachine;
+using Mirror;
+using Mirror.BouncyCastle.Asn1.X509;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,76 +11,158 @@ using UnityUtils;
 
 public class GameManager : SingletonMono<GameManager>
 {
-    AudioSource bgmSource;
-    public List<AudioClip> bgmClips;
+	[Serializable]
+	public struct Level
+	{
+		[Scene] public string scene;
+		public AudioClip bgm;
+	}
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+	public List<Level> levelList;
+	[Scene] public string mainScene;
+	public AudioClip mainBgm;
+	MyNetworkRoomManager networkManager;
+	AudioSource bgmSource;
+	[HideInInspector] public List<Transform> targets = new List<Transform>();
 
-    private void Start()
-    {
-        bgmSource = GetComponent<AudioSource>();
-        SwitchBgm(0);
-    }
+	protected override void Awake()
+	{
+		networkManager = FindFirstObjectByType<MyNetworkRoomManager>();
+		bgmSource = GetComponent<AudioSource>();
+		SceneManager.sceneLoaded += OnSceneLoaded;
+		base.Awake();
+	}
 
-    public IEnumerator _SwitchNextScene()
-    {
-        int id = SceneManager.GetActiveScene().buildIndex;
-        int count = SceneManager.sceneCountInBuildSettings;
-        yield return StartCoroutine(_SwitchScene((id + 1) % count));
-    }
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		if (mode == LoadSceneMode.Single)
+		{
+			foreach (var level in levelList)
+			{
+				if (level.scene == scene.path)
+				{
+					bgmSource.clip = level.bgm;
+					bgmSource.Play();
+				}
+			}
+		}
+	}
 
-    public void SwitchNextScene()
-    {
-        CircleTransition.Instance.TransitionToNext();
-    }
+	private void Start()
+	{
+		bgmSource.clip = mainBgm;
+		bgmSource.Play();
+	}
 
-    public IEnumerator _SwitchScene(int id)
-    {
-        yield return SceneManager.LoadSceneAsync(id);
-        SwitchBgm(id);
-    }
+	public void AddTarget(Transform transform)
+	{
+		var targetGroup = FindFirstObjectByType<CinemachineTargetGroup>();
+		targetGroup?.AddMember(transform, 1, 0);
+		targets.Add(transform);
+	}
 
-    public void SwitchScene(int id)
-    {
-        CircleTransition.Instance.TransitionToScene(id);
-    }
+	public void RemoveTarget(Transform transform)
+	{
+		var targetGroup = FindFirstObjectByType<CinemachineTargetGroup>();
+		targetGroup?.RemoveMember(transform);
+		targets.Remove(transform);
+	}
 
-    public void SwitchBgm(int id)
-    {
-        if (id < bgmClips.Count)
-        {
-            bgmSource.clip = bgmClips[id];
-            bgmSource.Play();
-        }
-    }
+	public void PlayAudioOnce(AudioClip clip, Vector2 pos)
+	{
+		float time = clip.length;
+		var obj = new GameObject(clip.name);
+		obj.transform.position = pos;
+		var audioSource = obj.AddComponent<AudioSource>();
+		audioSource.loop = false;
+		audioSource.clip = clip;
+		audioSource.Play();
+		Destroy(obj, time);
+	}
 
-    void Update()
-    {
-        // when r is pressed, restart the current scene
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Restart();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            SwitchScene(0);
-        }
-    }
+	public int GetCurLevelId()
+	{
+		string path = SceneManager.GetActiveScene().path;
+		for (int i = 0; i < levelList.Count; i++)
+		{
+			Level level = levelList[i];
+			if(level.scene == path)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
 
-    public void _Restart()
-    {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	public void SwitchMainScene()
+	{
+		if (NetworkServer.active)
+		{
+			SwitchScene(mainScene);
+			bgmSource.clip = mainBgm;
+			bgmSource.Play();
+		}
+	}
 
-        GameManager.instance.SwitchScene(SceneManager.GetActiveScene().buildIndex);
-    }
+	public void RestartLevel()
+	{
+		SwitchScene(SceneManager.GetActiveScene().path);
+	}
 
-    public void Restart()
-    {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	public void SwitchNextLevel()
+	{
+		if (NetworkServer.active)
+		{
+			int id = GetCurLevelId();
+			if(id >= 0)
+			{
+				SwitchLevel(id + 1);
+			}
+		}
+	}
 
-        CircleTransition.Instance.RestartScene();
-    }
+	public void SwitchLevel(int id)
+	{
+		if (NetworkServer.active)
+		{
+			id = id % levelList.Count;
+			string sceneName = levelList[id].scene;
+			SwitchScene(sceneName);
+		}
+	}
+
+	public void SwitchScene(string name)
+	{
+		if (NetworkServer.active)
+		{
+			targets.Clear();
+			networkManager.ChangeScene(name);
+		}
+	}
+
+	void Update()
+	{
+		// when r is pressed, restart the current scene
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			Restart();
+		}
+		if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
+		{
+			SwitchLevel(0);
+		}
+	}
+
+	public void _Restart()
+	{
+		// SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+		GameManager.instance.SwitchLevel(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void Restart()
+	{
+		// SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		SwitchScene(SceneManager.GetActiveScene().name);
+	}
 }

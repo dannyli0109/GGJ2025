@@ -25,11 +25,7 @@ namespace HFSM
 
 		public override void OnEnter()
 		{
-			if (_bubble != null)
-			{
-				_bubble.GetComponent<BubbleBehaviour>().destroyBubble();
-			}
-			_bubble = mono.GetComponent<BubbleSpawner>().SpawnBubble();
+			mono.GetComponent<BubbleSpawner>().SpawnBubble();
 			base.OnEnter();
 		}
 	}

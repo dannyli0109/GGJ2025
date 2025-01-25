@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399c6847b118a4a25ad4e4879358053a, type: 3}
   m_Name: BubbleSpawnerData
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 4618447527710482737, guid: e98bd66a7b761844799e05504f49496f, type: 3}
+  effectBubbleExplodePrefab: {fileID: 8962407905209019332, guid: fe3fbadc7195b2f459552fe5f503b39c, type: 3}
   bubbleSpeed: 0.3
   horizontalDrift: 0.1
-  bouncebackDistance: 0.1
+  bouncebackDistance: 0.05
   pushHorizontalSpeed: 3
   pushVerticalSpeed: 3
   maxHorizontalDistance: 3

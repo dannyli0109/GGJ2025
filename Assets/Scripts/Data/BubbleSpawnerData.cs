@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class BubbleSpawnerData : ScriptableObject
 {
     [Header("Bubble Prefab")]
-    [Tooltip("Drag and drop your bubble prefab here.")]
-    public GameObject bubblePrefab;
+    [Tooltip("Drag and drop your bubble explode effect prefab here.")]
+    public GameObject effectBubbleExplodePrefab;
     [Header("Movement Settings")]
     [Tooltip("Upward speed for bubbles.")]
     public float bubbleSpeed = 0.1f;
@@ -22,7 +22,7 @@ public class BubbleSpawnerData : ScriptableObject
     public float maxHorizontalDistance = 5f;
     [Tooltip("Time to destroy the bubble")]
     public float destroyTime = 10f;
-    [Tooltip("泡泡破裂音效组")]
+    [Tooltip("bubble pop sound")]
     public List<AudioClip> popClips;
     [Tooltip("blow bubble sound")]
     public List<AudioClip> blowClips;
