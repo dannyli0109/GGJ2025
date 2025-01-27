@@ -51,7 +51,7 @@ public class BubbleSpawner : NetworkBehaviour
 		// Add the BubbleBehaviour script to control the bubble's movement
 		BubbleBehaviour bubbleBehavior = newBubble.GetComponent<BubbleBehaviour>();
 		NetworkServer.Spawn(newBubble);
-		bubbleBehavior.driftDirection = xOffset > 0 ? 1 : -1;
+		//bubbleBehavior.driftDirection = xOffset > 0 ? 1 : -1;
 		_bubble = newBubble;
 	}
 }

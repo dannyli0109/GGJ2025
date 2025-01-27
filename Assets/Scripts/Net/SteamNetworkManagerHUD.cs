@@ -1,36 +1,72 @@
 using UnityEngine;
 using Mirror;
 using Steamworks;
+using Utils;
+using System.Collections;
 
 public class SteamNetworkManagerHUD : MonoBehaviour
 {
 	NetworkManager manager;
-
+	[HideInInspector] public bool initialized;
 	public int offsetX;
 	public int offsetY;
+	public float linkSteamTickTime;
 
 	private const string hostAddressKey = "Bubble";
+	public static CSteamID lobbyId { get; private set; }
 
 	protected Callback<LobbyCreated_t> lobbyCreated;
 	protected Callback<GameLobbyJoinRequested_t> lobbyJoinRequested;
 	protected Callback<LobbyEnter_t> lobbyEntered;
 
-	void Awake()
+	private void Awake()
 	{
 		manager = GetComponent<NetworkManager>();
+		if (!initialized)
+		{
+			StartCoroutine(LinkSteam(linkSteamTickTime));
+		}
 	}
 
-	private void Start()
+	void RegisterSteamCallback()
 	{
-		if (!SteamAPI.Init())
-		{
-			Debug.Log("Steam初始化失败/未连接到Steam服务器");
-			return;
-		}
-		Debug.Log("Steam初始化成功/已连接到Steam服务器");
 		lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
 		lobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnLobbyJoinRequested);
 		lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
+		SteamClient.SetWarningMessageHook(new SteamAPIWarningMessageHook_t(SteamAPIDebugTextHook));
+	}
+
+	private void Update()
+	{
+		if (initialized)
+		{
+			SteamAPI.RunCallbacks();
+		}
+	}
+
+	private void OnDestroy()
+	{
+		if (initialized)
+		{
+			SteamAPI.Shutdown();
+		}
+	}
+
+	IEnumerator LinkSteam(float tickTime)
+	{
+		Debug.Log("正在连接Steam服务器");
+		while (!initialized)
+		{
+			initialized = SteamAPI.Init();
+			yield return new WaitForSecondsRealtime(tickTime);
+		}
+		Debug.Log("已连接到Steam服务器");
+		RegisterSteamCallback();
+	}
+
+	void SteamAPIDebugTextHook(int nSeverity, System.Text.StringBuilder pchDebugText)
+	{
+		Debug.LogError(pchDebugText);
 	}
 
 	void OnGUI()
@@ -80,6 +116,7 @@ public class SteamNetworkManagerHUD : MonoBehaviour
 	}
 	private void OnLobbyEntered(LobbyEnter_t callback)
 	{
+		lobbyId = new CSteamID(callback.m_ulSteamIDLobby);
 		Debug.Log("有玩家进入大厅");
 		string hostAddress = SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), hostAddressKey);
 		manager.networkAddress = hostAddress;
@@ -142,24 +179,35 @@ public class SteamNetworkManagerHUD : MonoBehaviour
 
 	void StopButtons()
 	{
-		if (NetworkServer.active && NetworkClient.isConnected)
+		if (NetworkClient.isConnected)
 		{
-			GUILayout.BeginHorizontal();
+			if (NetworkServer.active)
+			{
+
+				GUILayout.BeginHorizontal();
 #if UNITY_WEBGL
                 if (GUILayout.Button("Stop Single Player"))
                     manager.StopHost();
 #else
-			// stop host if host mode
-			if (GUILayout.Button("Close Room"))
-				manager.StopHost();
+				// stop host if host mode
+				if (GUILayout.Button("Close Room"))
+					manager.StopHost();
+
 #endif
-			GUILayout.EndHorizontal();
-		}
-		else if (NetworkClient.isConnected)
-		{
-			// stop client if client-only
-			if (GUILayout.Button("Leave Room"))
-				manager.StopClient();
+				GUILayout.EndHorizontal();
+			}
+			else
+			{
+				// stop client if client-only
+				if (GUILayout.Button("Leave Room"))
+					manager.StopClient();
+
+			}
+
+			if (GUILayout.Button("Invite Friend"))
+			{
+				SteamFriends.ActivateGameOverlayInviteDialog(lobbyId);
+			}
 		}
 	}
 }

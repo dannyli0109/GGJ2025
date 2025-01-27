@@ -1,8 +1,11 @@
 using Mirror;
+using Mirror.BouncyCastle.Tls;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Utils;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 /// <summary>
 /// Controls the movement and destruction of individual bubble objects.
@@ -10,15 +13,13 @@ using UnityEngine;
 public class BubbleBehaviour : NetworkBehaviour
 {
 	public BubbleSpawnerData data;
-	[HideInInspector]
-	public float driftDirection;
+	Rigidbody2D rig;
 
-	float _distance = 0;
-	bool _shouldMove = true;
-	float _horizontalDistance = 0;
-	bool _hasBeenPushed = false;        // Once true, bubble moves in pushDirection only
-	Vector2 _pushDirection = Vector2.zero;  // The direction (unit vector) of the push
-	float pushPower = 50;
+	private void Awake()
+	{
+		rig = GetComponent<Rigidbody2D>();
+		rig.gravityScale = data.buoyancy / Physics2D.gravity.y;
+	}
 
 	private void Start()
 	{
@@ -60,73 +61,69 @@ public class BubbleBehaviour : NetworkBehaviour
 		GameManager.Instance.PlayAudioOnce(clip, transform.position);
 	}
 
-	[ServerCallback]
+	//[ServerCallback]
 	private void Update()
 	{
-		if (!_shouldMove) return;
-		if (_hasBeenPushed)
+		if (Input.GetKeyDown(KeyCode.A))
 		{
-			// transform.Translate(_pushDirection * pushSpeed * Time.deltaTime, Space.World);
-			// slow down horizontal speed as it approaches max distance
-			// it will be fast -> slow
-			if (_horizontalDistance > data.maxHorizontalDistance * 0.99f)
-			{
-				_horizontalDistance = data.maxHorizontalDistance;
-				_hasBeenPushed = false;
-			}
-
-			if (_hasBeenPushed)
-			{
-				// faster at the beginning
-				float percent = _horizontalDistance / data.maxHorizontalDistance;
-				// if (percent > 0.95) percent = 1; and snap to max distance
-				float speed = data.pushHorizontalSpeed * (1 - percent * percent * percent * percent);
-				Vector3 movement = new Vector3(
-					_pushDirection.x * speed * Time.deltaTime,
-					_pushDirection.y * data.pushVerticalSpeed * Time.deltaTime,
-					0f
-				);
-
-				if (_horizontalDistance + Mathf.Abs(movement.x) > data.maxHorizontalDistance)
-				{
-					movement.x = data.maxHorizontalDistance - _horizontalDistance;
-				}
-
-				transform.Translate(movement);
-				_horizontalDistance += Mathf.Abs(movement.x);
-			}
-
-			// If you still want the bubble to be destroyed off-screen:
+			Vector2 v = rig.velocity;
+			v.x = -data.pushSpeed;
+			rig.velocity = v;
 		}
-
-		// -----------------------------------------------------------
-		// Existing drifting logic (only used if NOT pushed yet)
-		// -----------------------------------------------------------
-		if (_shouldMove)
+		if (Input.GetKeyDown(KeyCode.D))
 		{
-			// Move the bubble upward + drift
-			Vector3 movement = new Vector3(
-				driftDirection * data.horizontalDrift * Time.deltaTime,
-				data.bubbleSpeed * Time.deltaTime,
-				0f
-			);
+			Vector2 v = rig.velocity;
+			v.x = data.pushSpeed;
+			rig.velocity = v;
+		}
+	}
 
-			// Track horizontal distance for bounceback
-			_distance += movement.x;
-			if (Mathf.Abs(_distance) > data.bouncebackDistance)
+	//[ServerCallback]
+	private void FixedUpdate()
+	{
+		AddAirDragForce();
+		Debug.Log(rig.velocity);
+	}
+
+	void AddAirDragForce()
+	{
+		Vector2 v = rig.velocity;
+		Vector2 force = -v.normalized * Math2D.CalAirDrag(v.magnitude, data.airDragFactor) * rig.mass;
+		rig.AddForce(force);
+	}
+
+	void Push(Vector2 dir)
+	{
+		rig.velocity = dir.normalized * data.pushSpeed;
+	}
+
+	IEnumerator Swing(float distance, float time, bool beginRight = true)
+	{
+		float halfTime = time / 2;
+		float a = distance / (halfTime * halfTime);
+		a = beginRight ? a : -a;
+		Vector2 velocity = rig.velocity;
+		velocity.x = a * halfTime;
+		rig.velocity = velocity;
+		float t = 0;
+		while (true)
+		{
+			yield return null;
+			t += Time.deltaTime;
+			velocity = rig.velocity;
+			if (t < halfTime)
 			{
-				driftDirection *= -1;
-				_distance = 0;
+				velocity.x -= a * Time.deltaTime;
 			}
-
-			float percent = _horizontalDistance / data.maxHorizontalDistance;
-			if (percent < 1 && _hasBeenPushed)
+			else if (t < time)
 			{
-				movement.x = 0;
+				velocity.x += a * Time.deltaTime;
 			}
-
-			// Apply the movement
-			transform.Translate(movement);
+			else
+			{
+				t = 0;
+			}
+			rig.velocity = velocity;
 		}
 	}
 
@@ -144,7 +141,6 @@ public class BubbleBehaviour : NetworkBehaviour
 			if (collision.contacts[0].normal.y > 0) return;
 			// Make the player a child of the bubble
 			// collision.transform.SetParent(transform, true);
-			_shouldMove = false;    // Stop the bubble from moving
 		}
 	}
 
@@ -155,21 +151,6 @@ public class BubbleBehaviour : NetworkBehaviour
 		{
 			// Reset the player's parent to null
 			// collision.transform.SetParent(null, true);
-			_shouldMove = true;    // Allow the bubble to move again
-		}
-	}
-
-	[ServerCallback]
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Ground"))
-		{
-			DestroyBubble();
-		}
-
-		if (other.CompareTag("Player"))
-		{
-			// PlayBounceAudio();
 		}
 	}
 
@@ -183,10 +164,13 @@ public class BubbleBehaviour : NetworkBehaviour
 	}
 
 	[ServerCallback]
-	private void OnTriggerStay2D(Collider2D other)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
+		if (other.CompareTag("Ground"))
+		{
+			DestroyBubble();
+		}
 		if (!other.CompareTag("Player")) return;
-
 
 		// If the bubble is already pushed, don't re-push it
 
@@ -195,48 +179,26 @@ public class BubbleBehaviour : NetworkBehaviour
 		Vector2 playerPos = other.transform.position;
 		Vector2 direction = (bubblePos - playerPos);
 
-		// Only push if the player is actually below or to the side (y > 0 => bubble is above the player)
-		if (direction.y <= 0)
-		{
-			// If you want symmetrical logic from above, remove or invert this check.
-			return;
-		}
-
 		// Compute how far from straight-up this direction is
-		float angle = Vector2.SignedAngle(Vector2.up, direction);
-		float absAngle = Mathf.Abs(angle);
+		float angle = Vector2.Angle(Vector2.up, direction);
 
 		// Decide final push direction based on angle thresholds
-		Vector2 finalDir;
+		Vector2 pushDir;
 
-		if (other.GetComponent<MovementController>().isOnGround)
+		float halfPushVerticalAngle = (180.0f - data.pushHorizontalAngle)/2;
+		if (angle < halfPushVerticalAngle)
 		{
-			// only check which side the player is on
-			finalDir = (playerPos.x > bubblePos.x) ? Vector2.left : Vector2.right;
+			pushDir = Vector2.up;
+		}
+		else if (angle < 180 - halfPushVerticalAngle)
+		{
+			pushDir = Mathf.Sign(direction.x) * Vector2.right;
 		}
 		else
 		{
-			// 0бу - 22.5бу => straight up
-			if (absAngle < 22.5f)
-			{
-				finalDir = Vector2.up;
-			}
-			// 22.5бу - 67.5бу => diagonal (б└45бу up)
-			else if (absAngle < 67.5f)
-			{
-				// If angle > 0 => direction is "left" from the bubble's perspective, so push up-left
-				finalDir = Vector2.up;
-			}
-			else
-			{
-				return;
-			}
+			return;
 		}
-		// Record that we got pushed in this final direction
-		_pushDirection = finalDir;
-		_hasBeenPushed = true;
-		_shouldMove = true;  // (Optional) Stop the drift if you want
-		_horizontalDistance = 0;
+		Push(pushDir);
 	}
 
 	/// <summary>

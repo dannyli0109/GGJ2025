@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityUtils;
+using Utils;
 
 public class CircleTransition : SingletonMono<CircleTransition>
 

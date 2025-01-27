@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Cinemachine;
+using Steamworks;
 
 public class MyNetworkRoomManager : NetworkRoomManager
 {
@@ -41,7 +42,7 @@ public class MyNetworkRoomManager : NetworkRoomManager
 	public override void OnRoomServerPlayersReady()
 	{
 		// calling the base method calls ServerChangeScene as soon as all players are in Ready state.
-		if (Utils.IsHeadless())
+		if (Mirror.Utils.IsHeadless())
 		{
 			base.OnRoomServerPlayersReady();
 		}
@@ -49,6 +50,12 @@ public class MyNetworkRoomManager : NetworkRoomManager
 		{
 			showStartButton = true;
 		}
+	}
+
+	public override void OnRoomStopClient()
+	{
+		Debug.Log("OnRoomStopClient");
+		SteamMatchmaking.LeaveLobby(SteamNetworkManagerHUD.lobbyId);
 	}
 
 	public override void OnGUI()

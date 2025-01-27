@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: BubbleSpawnerData
   m_EditorClassIdentifier: 
   effectBubbleExplodePrefab: {fileID: 8962407905209019332, guid: fe3fbadc7195b2f459552fe5f503b39c, type: 3}
-  bubbleSpeed: 0.3
+  riseSpeed: 0.3
+  airDragFactor: 1.6666666
+  buoyancy: 0.5
+  pushHorizontalAngle: 90
   horizontalDrift: 0.1
   bouncebackDistance: 0.05
-  pushHorizontalSpeed: 3
-  pushVerticalSpeed: 3
+  pushHorizontalSpeed: 5
+  pushVerticalSpeed: 5
   maxHorizontalDistance: 3
   destroyTime: 20
   popClips:

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityUtils;
+using Utils;
 
 public class GameManager : SingletonMono<GameManager>
 {
@@ -25,12 +25,13 @@ public class GameManager : SingletonMono<GameManager>
 	AudioSource bgmSource;
 	[HideInInspector] public List<Transform> targets = new List<Transform>();
 
-	protected override void Awake()
+	protected override void Init()
 	{
-		networkManager = FindFirstObjectByType<MyNetworkRoomManager>();
+		networkManager = NetworkManager.singleton as MyNetworkRoomManager;
 		bgmSource = GetComponent<AudioSource>();
 		SceneManager.sceneLoaded += OnSceneLoaded;
-		base.Awake();
+		bgmSource.clip = mainBgm;
+		bgmSource.Play();
 	}
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -46,12 +47,6 @@ public class GameManager : SingletonMono<GameManager>
 				}
 			}
 		}
-	}
-
-	private void Start()
-	{
-		bgmSource.clip = mainBgm;
-		bgmSource.Play();
 	}
 
 	public void AddTarget(Transform transform)
@@ -86,7 +81,7 @@ public class GameManager : SingletonMono<GameManager>
 		for (int i = 0; i < levelList.Count; i++)
 		{
 			Level level = levelList[i];
-			if(level.scene == path)
+			if (level.scene == path)
 			{
 				return i;
 			}
@@ -114,7 +109,7 @@ public class GameManager : SingletonMono<GameManager>
 		if (NetworkServer.active)
 		{
 			int id = GetCurLevelId();
-			if(id >= 0)
+			if (id >= 0)
 			{
 				SwitchLevel(id + 1);
 			}
@@ -157,7 +152,7 @@ public class GameManager : SingletonMono<GameManager>
 	{
 		// SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-		GameManager.instance.SwitchLevel(SceneManager.GetActiveScene().buildIndex);
+		SwitchLevel(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	public void Restart()
