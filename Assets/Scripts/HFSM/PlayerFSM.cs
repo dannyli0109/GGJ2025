@@ -68,9 +68,9 @@ namespace HFSM
 			normalFsm.AddTransition("Run", "Fall", condition: CheckOnAir, onTransition: OnTransitionPlatformToFall);
 			//normalFsm.AddTransition("CoyoteTime", "Jump", condition: CheckJump);
 			//normalFsm.AddTransition(new TransitionAfter("CoyoteTime", "Fall", movementController.movementData.coyoteTime, onTransition: OnTransitionPlatformToFall));
-			normalFsm.AddTransition("Jump", "Rise", condition: t => movementController.velocity.y > 0);
-			normalFsm.AddTransition("Rise", "Fall", condition: t => movementController.velocity.y <= 0);
-			normalFsm.AddTransition(new TransitionAfter("Bubble", "Idle", 0.2f));
+			normalFsm.AddTransition("Jump", "Fall", condition: t => movementController.velocity.y < 0);
+			//normalFsm.AddTransition("Rise", "Fall", condition: t => movementController.velocity.y <= 0);
+			normalFsm.AddTransition(new TransitionAfter("Bubble", "Idle", 0.5f));
 			//normalFsm.AddTransition("Rise", "AirJump", condition: CheckJump);
 			//normalFsm.AddTransition("AirJump", "Rise", condition: t => movementController.velocity.y > 0);
 

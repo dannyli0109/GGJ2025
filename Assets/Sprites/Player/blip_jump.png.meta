@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc6121da06b044847a7fe46bb997ee1b
+guid: dfe15950be5fabf4fb66801e5433b5b4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blip_walk_0
+      name: blip_jump_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6f833cfc42ffd64785ba9656cb33ec0
-      internalID: -1740583721
+      spriteID: 6720bdae4100da441abe844962675838
+      internalID: 253080257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_1
+      name: blip_jump_1
       rect:
         serializedVersion: 2
         x: 16
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22f7c615a7c3a3c4b81b336e81a1120f
-      internalID: -763018409
+      spriteID: 17a83a4b681c61f4c921e556063e79da
+      internalID: 69329895
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_2
+      name: blip_jump_2
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9c217db155e8f2418a7811a3678aabe
-      internalID: -152780248
+      spriteID: 98db244ad3a5cb541b423b6c64a63ed1
+      internalID: -1669478781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_3
+      name: blip_jump_3
       rect:
         serializedVersion: 2
         x: 48
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c350d618c1cbe4c9963e9495aba782
-      internalID: -988010620
+      spriteID: b8e28695679fa174a85e9dda3737bde4
+      internalID: -204102384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_4
+      name: blip_jump_4
       rect:
         serializedVersion: 2
         x: 64
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04eeba9afd937fb42b33aca7e6a6d777
-      internalID: 1010146883
+      spriteID: 7a4ae61fa956803429da3d3a238f2d96
+      internalID: -550341823
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_5
+      name: blip_jump_5
       rect:
         serializedVersion: 2
         x: 80
@@ -216,8 +216,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 803ac79a45e34fd4ca1c43fc1ed81dbc
-      internalID: -695075135
+      spriteID: 878d47f6eb33aaa478fb0e07d4fdf4c7
+      internalID: 107362584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blip_jump_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 328e1f44bd1448943a03b34c572a0b13
+      internalID: -1973822218
       vertices: []
       indices: 
       edges: []
@@ -233,12 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      blip_walk_0: -1740583721
-      blip_walk_1: -763018409
-      blip_walk_2: -152780248
-      blip_walk_3: -988010620
-      blip_walk_4: 1010146883
-      blip_walk_5: -695075135
+      blip_jump_0: 253080257
+      blip_jump_1: 69329895
+      blip_jump_2: -1669478781
+      blip_jump_3: -204102384
+      blip_jump_4: -550341823
+      blip_jump_5: 107362584
+      blip_jump_6: -1973822218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

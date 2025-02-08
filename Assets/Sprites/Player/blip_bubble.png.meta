@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc6121da06b044847a7fe46bb997ee1b
+guid: 86d7ab7a143136a4ab84bddfa50736b1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blip_walk_0
+      name: blip_bubble_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6f833cfc42ffd64785ba9656cb33ec0
-      internalID: -1740583721
+      spriteID: 75ad1ebe99df6f242a97ce7badee6939
+      internalID: -1854781550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_1
+      name: blip_bubble_1
       rect:
         serializedVersion: 2
         x: 16
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22f7c615a7c3a3c4b81b336e81a1120f
-      internalID: -763018409
+      spriteID: ccbfa6f12acfe8840bfaebb1ee758a7b
+      internalID: 1555202992
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_2
+      name: blip_bubble_2
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9c217db155e8f2418a7811a3678aabe
-      internalID: -152780248
+      spriteID: e759193bde9705c4dbc534bd14cfd423
+      internalID: -785947189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_3
+      name: blip_bubble_3
       rect:
         serializedVersion: 2
         x: 48
@@ -174,50 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c350d618c1cbe4c9963e9495aba782
-      internalID: -988010620
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blip_walk_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 04eeba9afd937fb42b33aca7e6a6d777
-      internalID: 1010146883
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blip_walk_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 803ac79a45e34fd4ca1c43fc1ed81dbc
-      internalID: -695075135
+      spriteID: bdfde6cd04597954e974b6179b5883d8
+      internalID: -322451504
       vertices: []
       indices: 
       edges: []
@@ -233,12 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      blip_walk_0: -1740583721
-      blip_walk_1: -763018409
-      blip_walk_2: -152780248
-      blip_walk_3: -988010620
-      blip_walk_4: 1010146883
-      blip_walk_5: -695075135
+      blip_bubble_0: -1854781550
+      blip_bubble_1: 1555202992
+      blip_bubble_2: -785947189
+      blip_bubble_3: -322451504
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

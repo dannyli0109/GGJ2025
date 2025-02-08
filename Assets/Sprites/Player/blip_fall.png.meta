@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc6121da06b044847a7fe46bb997ee1b
+guid: 0c70b3af670061e449e37fdf878c5e69
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blip_walk_0
+      name: blip_fall_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6f833cfc42ffd64785ba9656cb33ec0
-      internalID: -1740583721
+      spriteID: 08283e6444325084f97c0cfbda140a5e
+      internalID: 1030587202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_1
+      name: blip_fall_1
       rect:
         serializedVersion: 2
         x: 16
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22f7c615a7c3a3c4b81b336e81a1120f
-      internalID: -763018409
+      spriteID: 2aeebd9f674145144b69d0e7ac03cc58
+      internalID: 249622914
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_2
+      name: blip_fall_2
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9c217db155e8f2418a7811a3678aabe
-      internalID: -152780248
+      spriteID: 8666364ba7780ea46907f6fd8b12935b
+      internalID: 207113684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blip_walk_3
+      name: blip_fall_3
       rect:
         serializedVersion: 2
         x: 48
@@ -174,50 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c350d618c1cbe4c9963e9495aba782
-      internalID: -988010620
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blip_walk_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 04eeba9afd937fb42b33aca7e6a6d777
-      internalID: 1010146883
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blip_walk_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 803ac79a45e34fd4ca1c43fc1ed81dbc
-      internalID: -695075135
+      spriteID: 819bc73f6e1c8e14da0871727d6a4b65
+      internalID: -463683144
       vertices: []
       indices: 
       edges: []
@@ -233,12 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      blip_walk_0: -1740583721
-      blip_walk_1: -763018409
-      blip_walk_2: -152780248
-      blip_walk_3: -988010620
-      blip_walk_4: 1010146883
-      blip_walk_5: -695075135
+      blip_fall_0: 1030587202
+      blip_fall_1: 249622914
+      blip_fall_2: 207113684
+      blip_fall_3: -463683144
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
